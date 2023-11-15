@@ -144,7 +144,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
   console.log('User data:all ', APIData);
   useEffect(() => {
     filterData();
-    getdatafirbase();
+    //getdatafirbase();
 
     //genData();
     // postData();
