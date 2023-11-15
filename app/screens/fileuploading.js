@@ -22,12 +22,15 @@ export default class Fileuploading extends React.Component {
     ref.doc('abc').delete();
   };
   getdata = () => {
-    firestore()
-      .collection('new data')
-      .doc('abc')
-      .onSnapshot((documentSnapshot) => {
-        console.log('User data: ', documentSnapshot.data());
-      });
+    console.log('User data: ', 'demooo');
+    for (var i = 0; i < 16; i++) {
+      firestore()
+        .collection('new data')
+        .doc('id' + i)
+        .onSnapshot((documentSnapshot) => {
+          console.log('User data: ', documentSnapshot.data());
+        });
+    }
   };
   updatedata = () => {
     const ref = firestore().collection('new data');
@@ -39,16 +42,18 @@ export default class Fileuploading extends React.Component {
     // const userid = firestore().collection('new data').doc();
 
     // console.log('user id', userid._documentPath._parts[1]);
-    const ref = firestore().collection('new data');
-    const data = {
-      provider_type: 'eligible clinician',
-      developer: '4medica, Inc.',
-      provider_count: '10',
-      mktShare: '0.00281445956747385',
-      est_mips_2018: '30',
-      edition2015_base_status: 'NA',
-    };
-    ref.doc('abc').set(data);
+    const ref = firestore().collection('new data2');
+    for (var i = 0; i < 3; i++) {
+      const data = {
+        date: '2025-01-' + i,
+        text: 'result' + i + 1,
+        description: i + 'th result',
+        official: true,
+        field1: 'data field' + i + 'for element  1 ',
+        field2: 'data field' + i + 'for element  1 ',
+      };
+      ref.doc('id' + 1 + i).set(data);
+    }
 
     //  ref.doc(uid).update({
 

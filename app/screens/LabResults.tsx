@@ -1,3 +1,4 @@
+import firestore from '@react-native-firebase/firestore';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -47,11 +48,26 @@ export default function LabResultsScreen({ navigation, route }: any) {
   var data: any[] = [];
   var datagen: any[] = [];
   var tempdata: any[] = [];
-  const [APIData, setAPIData] = useState([]);
+  const [APIData, setAPIData]: any = useState([]);
   const [dateFrom, setDateFrom]: [Date | null, any] = useState(null);
   const [dateTo, setDateTo]: [Date | null, any] = useState(null);
   const [filteredData, setFilteredData]: [any, any] = useState([]);
   const [pressed, setPressed] = useState(false);
+  const getdatafirbase = () => {
+    console.log('User data: ', 'demooo');
+    for (var i = 0; i < 16; i++) {
+      firestore()
+        .collection('new data')
+        .doc('id' + i)
+        .onSnapshot((documentSnapshot) => {
+          console.log('User data: ', documentSnapshot.data());
+          const tempp = documentSnapshot.data();
+          datagen.push(tempp);
+        });
+    }
+    setAPIData(datagen);
+    console.log('User data:all ', APIData);
+  };
   const updateAPIData = () => {
     axios.put(`https://64ec81d3f9b2b70f2bfa7413.mockapi.io/fakedata/${1}`, {
       date: '2021-05-01',
@@ -62,6 +78,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
       field2: 'data field' + 3 + 'for element  1 ',
     });
   };
+
   const postData = () => {
     axios.post('https://64ec81d3f9b2b70f2bfa7413.mockapi.io/fakedata', {
       datagen,
@@ -102,9 +119,9 @@ export default function LabResultsScreen({ navigation, route }: any) {
     // console.log(APIData);
   };
   const filterData = () => {
-    // getData();
-    //APIData;
-    data = staticdata;
+    getdatafirbase();
+
+    data = APIData;
     //console.log(data);
     if (dateFrom && dateTo) {
       const prevDay = new Date(dateFrom);
@@ -124,8 +141,11 @@ export default function LabResultsScreen({ navigation, route }: any) {
     }
     console.log('fltr', filteredData);
   };
+  console.log('User data:all ', APIData);
   useEffect(() => {
     filterData();
+    getdatafirbase();
+
     //genData();
     // postData();
   }, [pressed]);
