@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Image,
@@ -122,7 +122,7 @@ export default function SideMenu(): JSX.Element {
       await AsyncStorage.clear();
       await AsyncStorage.setItem('d', 'l');
       const valuee = await AsyncStorage.getItem('d');
-      console.log('vvvv', valuee);
+      console.log('vvvxv', valuee);
     } catch (error) {
       console.log(error);
     }
@@ -137,6 +137,11 @@ export default function SideMenu(): JSX.Element {
     isDarkTheme = Colors.primary2;
     console.log('dark mode', isDarkTheme);
   }
+  useEffect(() => {
+    dark();
+    // this code will run once
+  }, []);
+  //dark(); // call ligth for intiating
 
   return (
     <NavigationContainer>
