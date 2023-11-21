@@ -399,7 +399,7 @@ export default function SideMenu(): JSX.Element {
           }}
         />
         <Drawer.Screen
-          name={t('Laboratoryresults')}
+          name={'Laboratoryresults'}
           component={LabResultsScreen}
           options={{
             title: t('Laboratoryresults'),

@@ -1,6 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
 import {
   PixelRatio,
@@ -13,11 +14,13 @@ import {
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../assets/values/Colors';
-import Hiridate2 from '../components/Hiridate2';
 import { DateInput } from '../components/Index';
 var isDarkTheme = '';
 export default function LabResultsScreen({ navigation, route }: any) {
+  const [flag, setflag] = useState('t');
+  var [fl, setfl] = useState('f');
   const theme = useColorScheme();
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
@@ -47,6 +50,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
   const { t, i18n } = useTranslation();
   var data: any[] = [];
   var datagen: any[] = [];
+  var idd: any[] = [];
   var tempdata: any[] = [];
   const [APIData, setAPIData]: any = useState([]);
   const [dateFrom, setDateFrom]: [Date | null, any] = useState(null);
@@ -65,6 +69,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
           datagen.push(tempp);
         });
     }
+
     setAPIData(datagen);
     console.log('User data:all ', APIData);
   };
@@ -143,12 +148,15 @@ export default function LabResultsScreen({ navigation, route }: any) {
   };
   console.log('User data:all ', APIData);
   useEffect(() => {
-    filterData();
+    // filterData();
     //getdatafirbase();
-
     //genData();
     // postData();
   }, [pressed]);
+
+  if (route.params) {
+    fl = route.params.fl;
+  }
   // getData();
   //  updateAPIData();
   //genData2();
@@ -156,6 +164,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
     const id = item.id;
     const date = new Date(item.date);
     const text = item.text;
+    const dataitem = item;
     const formattedDate = date
       .toLocaleDateString('ar-EG-u-nu-latn', {
         weekday: 'long',
@@ -256,7 +265,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
               size={20}
               color={Colors.primary1}
               onPress={() => {
-                navigation.navigate('Update', { idd: id });
+                navigation.navigate('Update', { idd: id, datit: dataitem });
               }}
             />
           </View>
@@ -283,9 +292,14 @@ export default function LabResultsScreen({ navigation, route }: any) {
           setDateTo={setDateTo}
           setDateFrom={setDateFrom}
         />
-        <Hiridate2 />
+
         <View style={styles.innerContainer}>
-          <TouchableOpacity style={styles.searchBtn} onPress={filterData}>
+          <TouchableOpacity
+            style={styles.searchBtn}
+            onPress={() => {
+              filterData();
+              setflag('f');
+            }}>
             <Text style={styles.searchText}>{t('search')}</Text>
           </TouchableOpacity>
           <View style={styles.border} />
@@ -361,6 +375,41 @@ export default function LabResultsScreen({ navigation, route }: any) {
               renderItem={CustomListCardItem}
             />
           </View>
+          {flag === 't' && (
+            <View>
+              <Text style={{ fontSize: 30, color: 'white' }}>
+                no data please refresh
+              </Text>
+              <Icon
+                name={'refresh'}
+                style={{ marginLeft: 100 }}
+                size={60}
+                color={'white'}
+                onPress={() => {
+                  filterData();
+                }}
+              />
+            </View>
+          )}
+          {fl === 't' && (
+            <View>
+              <Text style={{ fontSize: 30, color: 'white' }}>
+                no data please refresh
+              </Text>
+              <Icon
+                name={'refresh'}
+                style={{ marginLeft: 100 }}
+                size={60}
+                color={'white'}
+                onPress={() => {
+                  //setFilteredData([]);
+                  filterData();
+
+                  setfl('f');
+                }}
+              />
+            </View>
+          )}
         </View>
         <Modal isVisible={isModalVisible} style={styles.mainModel}>
           <View style={styles.failureContent}>
