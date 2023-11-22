@@ -1,7 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-
 import { useTranslation } from 'react-i18next';
 import {
   PixelRatio,
@@ -148,7 +147,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
   };
   console.log('User data:all ', APIData);
   useEffect(() => {
-    // filterData();
+    filterData();
     //getdatafirbase();
     //genData();
     // postData();
@@ -175,10 +174,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
       .replace('،', '');
     const dateElements = formattedDate.split(' ');
     return (
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('LabResultsMasterDetails', { item });
-        }}>
+      <TouchableOpacity onPress={() => {}}>
         <View style={styles.listItem}>
           <View
             style={{
@@ -247,17 +243,21 @@ export default function LabResultsScreen({ navigation, route }: any) {
               name={'download'}
               size={27}
               color={Colors.primary1}
-              onPress={() => {}}
+              onPress={() => {
+                navigation.navigate('LabResultsMasterDetails', { item });
+              }}
             />
             <FontAwesome5
               name={'trash'}
               size={27}
               color={Colors.primary1}
               onPress={() => {
-                toggleModal();
-                axios.delete(
+                // toggleModal();
+                /*  axios.delete(
                   `https://64ec81d3f9b2b70f2bfa7413.mockapi.io/fakedata/${id}`,
-                );
+                );*/
+                const ref = firestore().collection('new data');
+                ref.doc(id).delete();
               }}
             />
             <FontAwesome5
@@ -375,40 +375,25 @@ export default function LabResultsScreen({ navigation, route }: any) {
               renderItem={CustomListCardItem}
             />
           </View>
-          {flag === 't' && (
-            <View>
-              <Text style={{ fontSize: 30, color: 'white' }}>
-                no data please refresh
-              </Text>
-              <Icon
-                name={'refresh'}
-                style={{ marginLeft: 100 }}
-                size={60}
-                color={'white'}
-                onPress={() => {
-                  filterData();
-                }}
-              />
-            </View>
-          )}
-          {fl === 't' && (
-            <View>
-              <Text style={{ fontSize: 30, color: 'white' }}>
-                no data please refresh
-              </Text>
-              <Icon
-                name={'refresh'}
-                style={{ marginLeft: 100 }}
-                size={60}
-                color={'white'}
-                onPress={() => {
-                  //setFilteredData([]);
-                  filterData();
 
-                  setfl('f');
+          {flag === 't' && (
+            <>
+              <View
+                style={{ borderWidth: 1, borderColor: 'white', marginTop: 50 }}>
+                <Text style={{ fontSize: 35, color: 'white' }}>
+                  No data please search for item
+                </Text>
+              </View>
+              <Icon
+                name={'warning'}
+                style={{ marginLeft: 20 }}
+                size={60}
+                color={'white'}
+                onPress={() => {
+                  filterData();
                 }}
               />
-            </View>
+            </>
           )}
         </View>
         <Modal isVisible={isModalVisible} style={styles.mainModel}>

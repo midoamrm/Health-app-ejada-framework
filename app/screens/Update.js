@@ -2,6 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import DateInput from '../components/DateInput3';
 const Update = ({ navigation, route }) => {
   var id = route.params.idd;
   console.log('iddofdoc', id);
@@ -12,7 +13,8 @@ const Update = ({ navigation, route }) => {
   const [dd, setdd] = useState('f');
   const [te, sette] = useState('f');
   const [dtt, setdtt] = useState('f');
-
+  const [dateFrom, setDateFrom] = useState(null);
+  const [dateTo, setDateTo] = useState(null);
   const [date, setdate] = useState('');
   const [description, setdescription] = useState('');
   const [text, settext] = useState('');
@@ -39,6 +41,25 @@ const Update = ({ navigation, route }) => {
       setfield2(false);
     }
   };
+  if (dateFrom !== null) {
+    var ss = dateFrom.toLocaleDateString('en-EG-u-nu-latn', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+    });
+  }
+  var st = '';
+  if (dateFrom !== null) {
+    console.log('date from', ss.split('/'));
+    var tep = ss.split('/');
+    var day = tep[1] + '';
+    var month = tep[0];
+    day = day.length < 2 ? '0' + tep[1] : tep[1];
+    month = month.length < 2 ? '0' + tep[0] : tep[0];
+    st = tep[2] + '-' + month + '-' + day;
+
+    console.log('date from', st);
+  }
 
   return (
     <View
@@ -60,6 +81,7 @@ const Update = ({ navigation, route }) => {
         }}>
         Date:
       </Text>
+
       <View style={{ flexDirection: 'row' }}>
         <Text style={{ fontWeight: 'bold', fontSize: 17 }}>
           {dataitem.date === '' ? 'No entered data' : dataitem.date}
@@ -79,13 +101,11 @@ const Update = ({ navigation, route }) => {
         />
       </View>
       {dtt === 't' && (
-        <TextInput
-          placeholder={'eidt'}
-          placeholderTextColor="black"
-          onChangeText={(text) => Date(text)}
-          value={date}
-          textAlign="left"
-          maxLength={30}
+        <DateInput
+          dateFrom={dateFrom}
+          dateTo={dateTo}
+          setDateTo={setDateTo}
+          setDateFrom={setDateFrom}
         />
       )}
       <View
@@ -266,10 +286,10 @@ const Update = ({ navigation, route }) => {
             }
             //
             var dt = '';
-            if (date === '') {
+            if (dateFrom === null) {
               dt = dataitem.date;
             } else {
-              dt = date;
+              dt = st;
             }
             ///
             var tex = '';
@@ -298,6 +318,7 @@ const Update = ({ navigation, route }) => {
             settext('');
             setfield1('');
             setdescription('');
+            setDateFrom(null);
             navigation.navigate('Laboratoryresults', { fl: 't' });
             /*axios.put(
               `https://64ec81d3f9b2b70f2bfa7413.mockapi.io/fakedata/${id}`,
