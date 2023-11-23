@@ -22,12 +22,14 @@ export default function LabResultsScreen({ navigation, route }: any) {
   var [fl, setfl] = useState('f');
   const theme = useColorScheme();
   const [isModalVisible, setModalVisible] = useState(false);
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
   var lpr = 20;
   var ap = 13;
   var up = 13;
+  var btn = React.createRef<TouchableOpacity>();
   if (PixelRatio.get() <= 2) {
     lpr = 40;
     ap = 20;
@@ -56,6 +58,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
   const [dateTo, setDateTo]: [Date | null, any] = useState(null);
   const [filteredData, setFilteredData]: [any, any] = useState([]);
   const [pressed, setPressed] = useState(false);
+  const [pressed2, setPressed2] = useState(false);
   const getdatafirbase = () => {
     console.log('User data: ', 'demooo');
     for (var i = 0; i < 16; i++) {
@@ -65,7 +68,9 @@ export default function LabResultsScreen({ navigation, route }: any) {
         .onSnapshot((documentSnapshot) => {
           console.log('User data: ', documentSnapshot.data());
           const tempp = documentSnapshot.data();
-          datagen.push(tempp);
+          if (documentSnapshot.data()) {
+            datagen.push(tempp);
+          }
         });
     }
 
@@ -132,7 +137,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
       prevDay.setDate(prevDay.getDate() - 1);
       console.log(prevDay);
 
-      const filteredData = data.filter((item: any) => {
+      const filtereddData = data.filter((item: any) => {
         console.log('datee', new Date(item.date) >= prevDay);
 
         return (
@@ -141,13 +146,15 @@ export default function LabResultsScreen({ navigation, route }: any) {
           item.official === !pressed
         );
       });
-      setFilteredData(filteredData);
+      setFilteredData(filtereddData);
     }
     console.log('fltr', filteredData);
   };
   console.log('User data:all ', APIData);
+  console.log('pressed', pressed2);
   useEffect(() => {
     filterData();
+    console.log('fiter from 45', 'yes');
     //getdatafirbase();
     //genData();
     // postData();
@@ -155,6 +162,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
 
   if (route.params) {
     fl = route.params.fl;
+    // toggleModal();
   }
   // getData();
   //  updateAPIData();
@@ -252,12 +260,17 @@ export default function LabResultsScreen({ navigation, route }: any) {
               size={27}
               color={Colors.primary1}
               onPress={() => {
-                // toggleModal();
                 /*  axios.delete(
                   `https://64ec81d3f9b2b70f2bfa7413.mockapi.io/fakedata/${id}`,
                 );*/
                 const ref = firestore().collection('new data');
                 ref.doc(id).delete();
+                var filteredArray = filteredData.filter(
+                  (e: { id: string }) => e.id !== id,
+                );
+                console.log('arry of delete', filteredArray);
+                setFilteredData(filteredArray);
+                toggleModal();
               }}
             />
             <FontAwesome5
@@ -404,14 +417,13 @@ export default function LabResultsScreen({ navigation, route }: any) {
               <TouchableOpacity
                 onPress={() => {
                   toggleModal();
-                  filterData();
-                  //  toggleModal();
                 }}>
                 <Text style={styles.failureBtnText}>Yes</Text>
               </TouchableOpacity>
             </View>
           </View>
         </Modal>
+        <Modal isVisible={isModalVisible} style={styles.mainModel} />
       </View>
     </ScrollView>
   );

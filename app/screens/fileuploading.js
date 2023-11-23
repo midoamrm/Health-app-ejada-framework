@@ -23,14 +23,17 @@ export default class Fileuploading extends React.Component {
   };
   getdata = () => {
     console.log('User data: ', 'demooo');
-    for (var i = 0; i < 16; i++) {
-      firestore()
-        .collection('new data')
-        .doc('id' + i)
-        .onSnapshot((documentSnapshot) => {
-          console.log('User data: ', documentSnapshot.data());
-        });
-    }
+    // for (var i = 0; i < 16; i++) {
+    firestore()
+      .collection('new data')
+      .doc('id' + 2)
+      .onSnapshot((documentSnapshot) => {
+        if (!documentSnapshot.data()) {
+          console.log('data found');
+        }
+        console.log('User data: ', documentSnapshot.data());
+      });
+    //  }
   };
   updatedata = () => {
     const ref = firestore().collection('new data');
