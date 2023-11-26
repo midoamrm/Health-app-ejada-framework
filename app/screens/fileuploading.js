@@ -43,23 +43,22 @@ export default class Fileuploading extends React.Component {
   };
   adddata = () => {
     // const userid = firestore().collection('new data').doc();
-
     // console.log('user id', userid._documentPath._parts[1]);
-    const ref = firestore().collection('new data2');
-    for (var i = 0; i < 3; i++) {
+    /* const ref = firestore().collection('new data2');
+    for (var i = 6; i < 9; i++) {
       const data = {
-        date: '2025-01-' + i,
+        date: '2023-05-' + i,
         text: 'result' + i + 1,
         description: i + 'th result',
+        id: 'id' + i,
         official: true,
         field1: 'data field' + i + 'for element  1 ',
         field2: 'data field' + i + 'for element  1 ',
       };
-      ref.doc('id' + 1 + i).set(data);
+      ref.doc('id' + i).set(data);
     }
-
+*/
     //  ref.doc(uid).update({
-
     //  });
   };
   chooseFile = () => {

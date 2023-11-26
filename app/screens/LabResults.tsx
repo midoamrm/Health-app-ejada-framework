@@ -63,7 +63,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
     console.log('User data: ', 'demooo');
     for (var i = 0; i < 16; i++) {
       firestore()
-        .collection('new data')
+        .collection('new data2')
         .doc('id' + i)
         .onSnapshot((documentSnapshot) => {
           console.log('User data: ', documentSnapshot.data());
@@ -263,7 +263,8 @@ export default function LabResultsScreen({ navigation, route }: any) {
                 /*  axios.delete(
                   `https://64ec81d3f9b2b70f2bfa7413.mockapi.io/fakedata/${id}`,
                 );*/
-                const ref = firestore().collection('new data');
+                console.log('iddd', id);
+                const ref = firestore().collection('new data2');
                 ref.doc(id).delete();
                 var filteredArray = filteredData.filter(
                   (e: { id: string }) => e.id !== id,
@@ -423,7 +424,6 @@ export default function LabResultsScreen({ navigation, route }: any) {
             </View>
           </View>
         </Modal>
-        <Modal isVisible={isModalVisible} style={styles.mainModel} />
       </View>
     </ScrollView>
   );

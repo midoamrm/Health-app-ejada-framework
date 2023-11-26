@@ -306,7 +306,7 @@ const Update = ({ navigation, route }) => {
               fe = field1;
             }
 
-            const ref = firestore().collection('new data');
+            const ref = firestore().collection('new data2');
             ref.doc(id).update({
               date: dt,
               text: tex,
