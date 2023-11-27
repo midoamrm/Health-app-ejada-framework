@@ -13,13 +13,14 @@ import {
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../assets/values/Colors';
 import { DateInput } from '../components/Index';
 var isDarkTheme = '';
+
 export default function LabResultsScreen({ navigation, route }: any) {
   const [flag, setflag] = useState('t');
   var [fl, setfl] = useState('f');
+  const [iddd, setiddd] = useState('');
   const theme = useColorScheme();
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -149,6 +150,10 @@ export default function LabResultsScreen({ navigation, route }: any) {
       setFilteredData(filtereddData);
     }
     console.log('fltr', filteredData);
+    if (filteredData === []) {
+      setflag('t');
+      console.log('he', 'we have done');
+    }
   };
   console.log('User data:all ', APIData);
   console.log('pressed', pressed2);
@@ -182,7 +187,10 @@ export default function LabResultsScreen({ navigation, route }: any) {
       .replace('،', '');
     const dateElements = formattedDate.split(' ');
     return (
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('LabResultsMasterDetails', { item });
+        }}>
         <View style={styles.listItem}>
           <View
             style={{
@@ -251,9 +259,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
               name={'download'}
               size={27}
               color={Colors.primary1}
-              onPress={() => {
-                navigation.navigate('LabResultsMasterDetails', { item });
-              }}
+              onPress={() => {}}
             />
             <FontAwesome5
               name={'trash'}
@@ -264,14 +270,8 @@ export default function LabResultsScreen({ navigation, route }: any) {
                   `https://64ec81d3f9b2b70f2bfa7413.mockapi.io/fakedata/${id}`,
                 );*/
                 console.log('iddd', id);
-                const ref = firestore().collection('new data2');
-                ref.doc(id).delete();
-                var filteredArray = filteredData.filter(
-                  (e: { id: string }) => e.id !== id,
-                );
-                console.log('arry of delete', filteredArray);
-                setFilteredData(filteredArray);
                 toggleModal();
+                setiddd(id);
               }}
             />
             <FontAwesome5
@@ -398,15 +398,6 @@ export default function LabResultsScreen({ navigation, route }: any) {
                   No data please search for item
                 </Text>
               </View>
-              <Icon
-                name={'warning'}
-                style={{ marginLeft: 20 }}
-                size={60}
-                color={'white'}
-                onPress={() => {
-                  filterData();
-                }}
-              />
             </>
           )}
         </View>
@@ -418,8 +409,24 @@ export default function LabResultsScreen({ navigation, route }: any) {
               <TouchableOpacity
                 onPress={() => {
                   toggleModal();
+
+                  const ref = firestore().collection('new data2');
+                  ref.doc(iddd).delete();
+                  var filteredArray = filteredData.filter(
+                    (e: { id: string }) => e.id !== iddd,
+                  );
+                  console.log('arry of delete', filteredArray);
+                  setFilteredData(filteredArray);
                 }}>
                 <Text style={styles.failureBtnText}>Yes</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.failureBtnView}>
+              <TouchableOpacity
+                onPress={() => {
+                  toggleModal();
+                }}>
+                <Text style={styles.failureBtnText}>cancel</Text>
               </TouchableOpacity>
             </View>
           </View>
