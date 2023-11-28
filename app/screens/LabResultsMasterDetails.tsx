@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from '../assets/values/Colors';
 export default function LabResultsMasterDetails({ navigation, route }: any) {
@@ -17,6 +18,16 @@ export default function LabResultsMasterDetails({ navigation, route }: any) {
   });*/
   return (
     <>
+      <View style={{ padding: 10 }}>
+        <FontAwesome5
+          name={'arrow-left'}
+          size={30}
+          color={'white'}
+          onPress={() => {
+            navigation.navigate('Laboratoryresults', { fl: 't' });
+          }}
+        />
+      </View>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.text}>رقم الطلب: {item.id}</Text>

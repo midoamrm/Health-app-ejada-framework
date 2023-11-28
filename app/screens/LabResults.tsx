@@ -51,6 +51,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
   });*/
   const { t, i18n } = useTranslation();
   var data: any[] = [];
+  var data2: any[] = [];
   var datagen: any[] = [];
   var idd: any[] = [];
   var tempdata: any[] = [];
@@ -126,7 +127,15 @@ export default function LabResultsScreen({ navigation, route }: any) {
       .then((response) => {
         setAPIData(response.data);
       });
+
     // console.log(APIData);
+  };
+  const update = () => {
+    var filteredArray = filteredData.filter(
+      (e: { id: string }) => e.id !== 'id1',
+    );
+    console.log('arry of delete', filteredArray);
+    setFilteredData(filteredArray);
   };
   const filterData = () => {
     getdatafirbase();
@@ -149,29 +158,21 @@ export default function LabResultsScreen({ navigation, route }: any) {
       });
       setFilteredData(filtereddData);
     }
+    data2 = filteredData;
     console.log('fltr', filteredData);
-    if (filteredData === []) {
-      setflag('t');
-      console.log('he', 'we have done');
-    }
+    console.log('datalength', data2.length);
   };
   console.log('User data:all ', APIData);
   console.log('pressed', pressed2);
   useEffect(() => {
     filterData();
     console.log('fiter from 45', 'yes');
-    //getdatafirbase();
-    //genData();
-    // postData();
   }, [pressed]);
 
   if (route.params) {
     fl = route.params.fl;
-    // toggleModal();
   }
-  // getData();
-  //  updateAPIData();
-  //genData2();
+
   const CustomListCardItem = ({ item }: any) => {
     const id = item.id;
     const date = new Date(item.date);
@@ -312,7 +313,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
             style={styles.searchBtn}
             onPress={() => {
               filterData();
-              setflag('f');
+              //   setflag('f');
             }}>
             <Text style={styles.searchText}>{t('search')}</Text>
           </TouchableOpacity>
@@ -393,9 +394,15 @@ export default function LabResultsScreen({ navigation, route }: any) {
           {flag === 't' && (
             <>
               <View
-                style={{ borderWidth: 1, borderColor: 'white', marginTop: 50 }}>
+                style={{
+                  borderWidth: 1,
+                  borderColor: 'white',
+                  marginTop: 50,
+                  borderRadius: 10,
+                  padding: 5,
+                }}>
                 <Text style={{ fontSize: 35, color: 'white' }}>
-                  No data please search for item
+                  No data search for item
                 </Text>
               </View>
             </>
