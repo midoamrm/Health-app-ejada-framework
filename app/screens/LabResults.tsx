@@ -149,7 +149,13 @@ export default function LabResultsScreen({ navigation, route }: any) {
 
       const filtereddData = data.filter((item: any) => {
         console.log('datee', new Date(item.date) >= prevDay);
-
+        if (
+          new Date(item.date) >= prevDay &&
+          new Date(item.date) <= dateTo &&
+          item.official === !pressed
+        ) {
+          setflag('f');
+        }
         return (
           new Date(item.date) >= prevDay &&
           new Date(item.date) <= dateTo &&
@@ -312,7 +318,15 @@ export default function LabResultsScreen({ navigation, route }: any) {
           <TouchableOpacity
             style={styles.searchBtn}
             onPress={() => {
+              setflag('t');
               filterData();
+              /*  data2 = filteredData;
+              if (data2.length === 0) {
+                setflag('t');
+                console.log('data2', 'no data');
+              } else {
+                setflag('f');
+              }*/
               //   setflag('f');
             }}>
             <Text style={styles.searchText}>{t('search')}</Text>
@@ -340,6 +354,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
                   : { backgroundColor: '#007bff' },
               ]}
               onPress={() => {
+                setflag('t');
                 setPressed(true);
               }}>
               <Text
@@ -365,6 +380,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
                   : { backgroundColor: '#007bff' },
               ]}
               onPress={() => {
+                setflag('t');
                 setPressed(false);
               }}>
               <Text
@@ -419,9 +435,12 @@ export default function LabResultsScreen({ navigation, route }: any) {
 
                   const ref = firestore().collection('new data2');
                   ref.doc(iddd).delete();
-                  var filteredArray = filteredData.filter(
+                  var filteredArray: any[] = filteredData.filter(
                     (e: { id: string }) => e.id !== iddd,
                   );
+                  if (filteredArray.length === 0) {
+                    setflag('t');
+                  }
                   console.log('arry of delete', filteredArray);
                   setFilteredData(filteredArray);
                 }}>

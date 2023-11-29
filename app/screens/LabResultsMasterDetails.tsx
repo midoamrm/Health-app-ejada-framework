@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {
   ScrollView,
@@ -6,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from '../assets/values/Colors';
@@ -16,6 +18,36 @@ export default function LabResultsMasterDetails({ navigation, route }: any) {
     headerLeft: () => appBar(route.params.nav),
     swipeEnabled: false,
   });*/
+  // pdf code
+  const generateHTML = (value: string) =>
+    `<div>
+<span>Hi ${value}, how are you?
+</span>
+</div>`;
+  const html = generateHTML('');
+  const options = { html, fileName: 'test', directory: 'Documents' };
+  const gnpdf = async (op: RNHTMLtoPDF.Options) => {
+    return await RNHTMLtoPDF.convert(op);
+  };
+  const file = gnpdf(options);
+
+  var pdfSource;
+  const pdfuri = async () => {
+    await AsyncStorage.setItem('urii', (await file).filePath as string);
+    console.log('uri', (await file).filePath);
+  };
+  var valuee;
+  const geturi = async () => {
+    valuee = await AsyncStorage.getItem('urii');
+    console.log('source', valuee);
+  };
+  pdfuri();
+  geturi();
+  //console.log('source2', valuee);
+  // const pdfSource: number | Source = pdfuri() as number | Source;
+  //const uri = decodeURI(pdfSource as string);
+  //console.log('uri', uri);
+
   return (
     <>
       <View style={{ padding: 10 }}>
@@ -28,6 +60,7 @@ export default function LabResultsMasterDetails({ navigation, route }: any) {
           }}
         />
       </View>
+
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.text}>رقم الطلب: {item.id}</Text>

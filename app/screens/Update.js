@@ -200,6 +200,7 @@ const Update = ({ navigation, route }) => {
             placeholderTextColor="black"
             onChangeText={(text) => Textt(text)}
             value={text}
+            style={{ color: 'black' }}
             textAlign="left"
             maxLength={30}
           />
@@ -244,6 +245,7 @@ const Update = ({ navigation, route }) => {
             placeholder={'eidt'}
             placeholderTextColor="black"
             onChangeText={(text) => Description(text)}
+            style={{ color: 'black' }}
             value={description}
             textAlign="left"
             maxLength={30}
@@ -287,6 +289,7 @@ const Update = ({ navigation, route }) => {
             placeholder={'eidt'}
             placeholderTextColor="black"
             onChangeText={(text) => Field1(text)}
+            style={{ color: 'black' }}
             value={field1}
             textAlign="left"
             maxLength={30}
