@@ -88,6 +88,7 @@ export default class Fileuploading extends React.Component {
           // const { uri } = source;
           const filename = source.substring(source.lastIndexOf('/') + 1);
           const uri = decodeURI(source);
+
           const task = storage().ref(filename).putFile(uri);
 
           task.on('state_changed', (taskSnapshot) => {

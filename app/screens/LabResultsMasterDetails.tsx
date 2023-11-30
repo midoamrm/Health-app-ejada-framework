@@ -1,15 +1,19 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {
+  Button,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import DocumentPicker from 'react-native-document-picker';
+import FileViewer from 'react-native-file-viewer';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import RNFetchBlob from 'rn-fetch-blob';
 import Colors from '../assets/values/Colors';
 export default function LabResultsMasterDetails({ navigation, route }: any) {
   const item = route.params.item;
@@ -19,29 +23,74 @@ export default function LabResultsMasterDetails({ navigation, route }: any) {
     swipeEnabled: false,
   });*/
   // pdf code
+  const datepdf = new Date(item.date).toLocaleDateString('ar-EG-u-nu-latn', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
   const generateHTML = (value: string) =>
     `<div>
-<span>Hi ${value}, how are you?
-</span>
+    <header>
+    <h1>    Report Of Lab Result </h1>  
+</header>
+
+<p><h2>ID: ${item.id}</h2> 
+</p>
+<p><h2>Date OF Order: ${datepdf}</h2> 
+</p>
+<p><h2>Name of Result: ${item.text}</h2> 
+</p>
+<p><h2>Result description: ${item.description}</h2> 
+</p>
+
+<p><h2>Result Status: ${!item.official ? 'Approved' : 'Not Approved '}</h2> 
+</p>
+<p><h2>Result Info 1: ${item.field1}</h2> 
+</p>
+<p><h2>Result Info 2: ${item.field2}</h2> 
+</p>
 </div>`;
-  const html = generateHTML('');
-  const options = { html, fileName: 'test', directory: 'Documents' };
+  const html = generateHTML('he we make pdffffff');
+  const options = {
+    html: html,
+    fileName: 'test',
+    directory: 'Documents',
+    base64: true,
+  };
   const gnpdf = async (op: RNHTMLtoPDF.Options) => {
     return await RNHTMLtoPDF.convert(op);
   };
   const file = gnpdf(options);
-
+  console.log('file', file);
   var pdfSource;
   const pdfuri = async () => {
     await AsyncStorage.setItem('urii', (await file).filePath as string);
+    let filePath = RNFetchBlob.fs.dirs.DownloadDir + '/' + item.id + '.pdf';
+    console.log('filepathhhh', filePath);
+    RNFetchBlob.fs
+      .writeFile(filePath, (await file).base64 as string | number[], 'base64')
+      .then((response) => {
+        console.log('Success Log: ', response);
+      })
+      .catch((errors) => {
+        console.log(' Error Log: ', errors);
+      });
     console.log('uri', (await file).filePath);
   };
   var valuee;
   const geturi = async () => {
     valuee = await AsyncStorage.getItem('urii');
-    console.log('source', valuee);
+    /*const destinationPath = RNFS.CachesDirectoryPath;
+    const FileName = 'testt.pdf';
+    console.log('destinationPath', destinationPath);
+    const destinationFile = destinationPath + '/' + FileName;
+    var stemp = '';
+    stemp = valuee as string;
+    RNFS.copyFile(stemp, destinationFile);*/
+    // console.log('source', valuee);
   };
-  pdfuri();
+
   geturi();
   //console.log('source2', valuee);
   // const pdfSource: number | Source = pdfuri() as number | Source;
@@ -80,6 +129,64 @@ export default function LabResultsMasterDetails({ navigation, route }: any) {
           </Text>
           <Text style={styles.text}>معلومة1: {item.field1}</Text>
           <Text style={styles.text}>معلومة2: {item.field2}</Text>
+          <Text style={styles.text2}>
+            Pdf Report Of {item.id} Result Has been Created
+          </Text>
+        </View>
+        <View
+          style={{
+            width: 250,
+            marginLeft: 70,
+            paddingBottom: 15,
+          }}>
+          <Button
+            title="Download Pdf"
+            onPress={() => {
+              pdfuri();
+            }}
+          />
+        </View>
+        <View
+          style={{
+            width: 250,
+            marginLeft: 70,
+          }}>
+          <Button
+            title="Select pdf form download folder and View "
+            onPress={() => {
+              DocumentPicker.pick({
+                type: [DocumentPicker.types.allFiles],
+
+                copyTo: 'cachesDirectory',
+              }).then((res) => {
+                // log file content
+                console.log('DocumentPicker res', res);
+
+                console.log(res[0].fileCopyUri);
+                // add file to filesToUpload
+                const stemp = res[0].fileCopyUri + '';
+                const uri = stemp;
+                const uri2 = uri.replace('file://', '');
+                console.log('opening path', res[0].uri);
+                // RNFetchBlob.android.actionViewIntent(uri2, 'application/pdf');
+                FileViewer.open(stemp, { showOpenWithDialog: true })
+                  .then(() => {
+                    console.log('success');
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+                // console.log(res.fileCopyUri);
+                //  console.log(res.name);
+                try {
+                  //  const uri = decodeURI(res.fileCopyUri);
+                  // const fname = res.name;
+                } catch (error) {
+                  // console.log(error);
+                }
+              });
+            }}
+          />
         </View>
       </ScrollView>
     </>
@@ -118,7 +225,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: Colors.primary1,
-    marginVertical: 20,
+    marginVertical: 10,
+  },
+  text2: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'green',
+    marginVertical: 10,
   },
   appBarView: {
     backgroundColor: '#1D5B8C',
