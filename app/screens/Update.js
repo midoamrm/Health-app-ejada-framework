@@ -111,7 +111,7 @@ const Update = ({ navigation, route }) => {
             setfield1('');
             setdescription('');
             setDateFrom(null);
-            navigation.navigate('Laboratoryresults', { fl: 't' });
+            navigation.navigate('Laboratoryresults', { fl: gvalue });
           }}
         />
       </View>

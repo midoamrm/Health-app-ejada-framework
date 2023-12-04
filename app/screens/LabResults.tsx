@@ -1,6 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
+import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   PixelRatio,
@@ -23,9 +24,17 @@ export default function LabResultsScreen({ navigation, route }: any) {
   const [iddd, setiddd] = useState('');
   const theme = useColorScheme();
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isModalVisible2, setModalVisible2] = useState(false);
+  const [isModalVisible3, setModalVisible3] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+  };
+  const toggleModal2 = () => {
+    setModalVisible2(!isModalVisible2);
+  };
+  const toggleModal3 = () => {
+    setModalVisible3(!isModalVisible3);
   };
   var lpr = 20;
   var ap = 13;
@@ -138,7 +147,24 @@ export default function LabResultsScreen({ navigation, route }: any) {
     setFilteredData(filteredArray);
   };
   const filterData = () => {
-    getdatafirbase();
+    //
+    console.log('User data: ', 'demooo');
+    for (var i = 0; i < 16; i++) {
+      firestore()
+        .collection('new data2')
+        .doc('id' + i)
+        .onSnapshot((documentSnapshot) => {
+          console.log('User data: ', documentSnapshot.data());
+          const tempp = documentSnapshot.data();
+          if (documentSnapshot.data()) {
+            datagen.push(tempp);
+          }
+        });
+    }
+
+    setAPIData(datagen);
+    console.log('User data:all ', APIData);
+    ///
 
     data = APIData;
     //console.log(data);
@@ -172,13 +198,19 @@ export default function LabResultsScreen({ navigation, route }: any) {
   console.log('pressed', pressed2);
   useEffect(() => {
     filterData();
-    console.log('fiter from 45', 'yes');
   }, [pressed]);
-
+  useFocusEffect(
+    useCallback(() => {
+      if (route.params) {
+        toggleModal2();
+      } else {
+        toggleModal2();
+      }
+    }, []),
+  );
   if (route.params) {
     fl = route.params.fl;
   }
-
   const CustomListCardItem = ({ item }: any) => {
     const id = item.id;
     const date = new Date(item.date);
@@ -286,6 +318,11 @@ export default function LabResultsScreen({ navigation, route }: any) {
               size={20}
               color={Colors.primary1}
               onPress={() => {
+                var filteredArray: any[] = filteredData.filter(
+                  (e: { id: string }) => e.id !== id,
+                );
+                setFilteredData(filteredArray);
+
                 navigation.navigate('Update', { idd: id, datit: dataitem });
               }}
             />
@@ -453,6 +490,53 @@ export default function LabResultsScreen({ navigation, route }: any) {
                   toggleModal();
                 }}>
                 <Text style={styles.failureBtnText}>cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+        <Modal isVisible={isModalVisible2} style={styles.mainModel}>
+          <View style={styles.failureContent}>
+            <Text style={styles.popupSubTitle}>Data has been updated</Text>
+
+            <View style={styles.failureBtnView}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (route.params) {
+                    fl = route.params.fl;
+                    if (fl) {
+                      setPressed(true);
+                    } else {
+                      setPressed(false);
+                    }
+                  }
+
+                  toggleModal3();
+                  toggleModal2();
+                }}>
+                <Text style={styles.failureBtnText}>ok </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+        <Modal isVisible={isModalVisible3} style={styles.mainModel}>
+          <View style={styles.failureContent}>
+            <Text style={styles.popupSubTitle}>Data has been refreshed</Text>
+
+            <View style={styles.failureBtnView}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (route.params) {
+                    fl = route.params.fl;
+                    if (fl) {
+                      setPressed(false);
+                    } else {
+                      setPressed(true);
+                    }
+                  }
+
+                  toggleModal3();
+                }}>
+                <Text style={styles.failureBtnText}>ok </Text>
               </TouchableOpacity>
             </View>
           </View>
