@@ -130,3 +130,6 @@ https://github.com/midoamrm/health-app/assets/36801941/d62e674b-22c4-44b0-815c-f
 ![Screenshot_1696337477](https://github.com/midoamrm/health-app/assets/36801941/5c5683cf-dd41-4af9-8239-3605b307d42e)
 # Image22
 ![Screenshot_1696425598](https://github.com/midoamrm/health-app/assets/36801941/2f24f462-b564-4302-8f71-69bb22b8baa1)
+# Update data with auto refresh
+https://github.com/midoamrm/health-app/assets/36801941/6be8b950-58f5-4b8d-b0da-32625d4e90f9
+
