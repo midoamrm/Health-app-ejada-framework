@@ -17,6 +17,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../assets/values/Colors';
 import { CustomDrawer } from '../components/Index';
 import Tabs from '../screens/Aboutapp';
+import Add from '../screens/Add';
 import Blooddonation from '../screens/BloodDonation';
 import Callus from '../screens/Callus';
 import Daterecord from '../screens/Datercord';
@@ -442,6 +443,13 @@ export default function SideMenu(): JSX.Element {
         <Drawer.Screen
           name={'Update'}
           component={Update}
+          options={{
+            drawerItemStyle: { display: 'none' },
+          }}
+        />
+        <Drawer.Screen
+          name={'Add'}
+          component={Add}
           options={{
             drawerItemStyle: { display: 'none' },
           }}

@@ -165,7 +165,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
     setAPIData(datagen);
     console.log('User data:all ', APIData);
     ///
-
+    ///// idea  put   setFilteredData2(data) then as below
     data = APIData;
     //console.log(data);
     if (dateFrom && dateTo) {
@@ -201,16 +201,13 @@ export default function LabResultsScreen({ navigation, route }: any) {
   }, [pressed]);
   useFocusEffect(
     useCallback(() => {
-      if (route.params) {
-        toggleModal2();
-      } else {
-        toggleModal2();
-      }
+      toggleModal2();
     }, []),
   );
-  if (route.params) {
+  /* if (route.params) {
     fl = route.params.fl;
-  }
+    console.log('flafffffgfggf', fl);
+  }*/
   const CustomListCardItem = ({ item }: any) => {
     const id = item.id;
     const date = new Date(item.date);
@@ -335,15 +332,49 @@ export default function LabResultsScreen({ navigation, route }: any) {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text
-          style={{
-            color: '#8DA9B6',
-            fontSize: lpr,
-            fontWeight: 'bold',
-            padding: 20,
-          }}>
-          {t('Laboratoryresults')}
-        </Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text
+            style={{
+              color: '#8DA9B6',
+              fontSize: lpr,
+              fontWeight: 'bold',
+              padding: 20,
+            }}>
+            {t('Laboratoryresults')}
+          </Text>
+          <Text
+            style={{
+              color: '#8DA9B6',
+              fontSize: lpr,
+              fontWeight: 'bold',
+              padding: 10,
+            }}>
+            Add new Report
+          </Text>
+          <TouchableOpacity>
+            <View
+              style={{
+                marginLeft: 1,
+                marginRight: 4,
+                marginTop: 15,
+                backgroundColor: 'white',
+                borderRadius: 65,
+                padding: 10,
+                borderColor: 'black',
+                borderWidth: 1,
+              }}>
+              <FontAwesome5
+                name={'plus'}
+                size={15}
+                color={Colors.primary1}
+                onPress={() => {
+                  navigation.navigate('Add');
+                }}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+
         <DateInput
           dateFrom={dateFrom}
           dateTo={dateTo}
@@ -496,7 +527,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
         </Modal>
         <Modal isVisible={isModalVisible2} style={styles.mainModel}>
           <View style={styles.failureContent}>
-            <Text style={styles.popupSubTitle}>Data has been updated</Text>
+            <Text style={styles.popupSubTitle}>Page has been updated</Text>
 
             <View style={styles.failureBtnView}>
               <TouchableOpacity
@@ -520,7 +551,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
         </Modal>
         <Modal isVisible={isModalVisible3} style={styles.mainModel}>
           <View style={styles.failureContent}>
-            <Text style={styles.popupSubTitle}>Data has been refreshed</Text>
+            <Text style={styles.popupSubTitle}>Page has been refreshed</Text>
 
             <View style={styles.failureBtnView}>
               <TouchableOpacity

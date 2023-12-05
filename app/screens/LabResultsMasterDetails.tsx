@@ -105,7 +105,7 @@ export default function LabResultsMasterDetails({ navigation, route }: any) {
           size={30}
           color={'white'}
           onPress={() => {
-            navigation.navigate('Laboratoryresults', { fl: 't' });
+            navigation.navigate('Laboratoryresults');
           }}
         />
       </View>

@@ -25,7 +25,7 @@ export default class Fileuploading extends React.Component {
     console.log('User data: ', 'demooo');
     // for (var i = 0; i < 16; i++) {
     firestore()
-      .collection('new data')
+      .collection('new data2')
       .doc('id' + 2)
       .onSnapshot((documentSnapshot) => {
         if (!documentSnapshot.data()) {
