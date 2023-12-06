@@ -1,14 +1,24 @@
 import firestore from '@react-native-firebase/firestore';
 import React, { useMemo, useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Modal from 'react-native-modal';
 import RadioGroup from 'react-native-radio-buttons-group';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Colors from '../assets/values/Colors';
 import DateInput from '../components/DateInput3';
 const Add = ({ navigation, route }) => {
   // var id = route.params.idd;
 
   //var dataitem = route.params.datit;
   const [cc, setcc] = useState(0);
+  const [isModalVisible, setModalVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('2');
   const [gvalue, setGvalue] = useState(true);
   const [f, setf] = useState('f');
@@ -22,6 +32,9 @@ const Add = ({ navigation, route }) => {
   const [text, settext] = useState('');
   const [field1, setfield1] = useState('');
   const [field2, setfield2] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
   var datagen = [];
   const radioButtons = useMemo(
     () => [
@@ -96,28 +109,6 @@ const Add = ({ navigation, route }) => {
 
     console.log('date from', st);
   }
-  const getid = () => {
-    var cont = 0;
-
-    for (var i = 0; i < 16; i++) {
-      console.log('hi');
-      firestore()
-        .collection('new data2')
-        .doc('id' + i)
-        .onSnapshot((documentSnapshot) => {
-          // console.log('User data: from add ', documentSnapshot.data());
-          const tempp = documentSnapshot.data();
-          //console.log(tempp);
-          if (documentSnapshot.data()) {
-            datagen.push(tempp);
-            cont++;
-            console.log('hhiiiiiiiiiiiiu', cont);
-            // setcc(cont);
-          }
-        });
-    }
-    console.log('datagenformlen', cont);
-  };
 
   return (
     <>
@@ -308,29 +299,176 @@ const Add = ({ navigation, route }) => {
               }
               console.log('gvalue', gvalue);
               const ref = firestore().collection('new data2');
+              const ref2 = firestore().collection('new data');
 
+              var tempp = 0;
+              firestore()
+                .collection('new data')
+                .doc('lastid')
+                .onSnapshot((documentSnapshot) => {
+                  // console.log('lastid', documentSnapshot.data());
+                  tempp = documentSnapshot.data().id + 1;
+
+                  console.log('lastid', tempp);
+                  if (documentSnapshot.data()) {
+                  }
+                  setcc(tempp);
+                  return;
+                });
               const data = {
                 date: dt,
                 text: tex,
                 description: d,
-                id: 'id5',
+                id: 'id' + tempp,
+
                 official: gvalue,
                 field1: fe,
                 field2: 'data field' + 4 + 'for element  1 ',
               };
+
+              ref.doc('id' + cc).set(data);
               //  ref.doc('id5').set(data);
               setdate('');
               settext('');
               setfield1('');
               setdescription('');
               setDateFrom(null);
+              toggleModal();
               // navigation.navigate('Laboratoryresults', { fl: 't' });
             }}
           />
         </View>
       </View>
+      <Modal isVisible={isModalVisible} style={styles.mainModel}>
+        <View style={styles.failureContent}>
+          <Text style={styles.popupSubTitle}>Data has been added</Text>
+
+          <View style={styles.failureBtnView}>
+            <TouchableOpacity
+              onPress={() => {
+                const ref3 = firestore().collection('new data');
+                ref3.doc('lastid').set({ id: cc });
+                toggleModal();
+                navigation.navigate('Laboratoryresults');
+              }}>
+              <Text style={styles.failureBtnText}>ok </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </>
   );
 };
 
 export default Add;
+const styles = StyleSheet.create({
+  mainModel: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  failureContent: {
+    backgroundColor: 'white',
+    borderRadius: 30,
+    padding: 10,
+    alignItems: 'center',
+    width: '95%',
+  },
+  failureBtnView: {
+    backgroundColor: '#1D5B8C',
+    borderRadius: 30,
+    paddingVertical: 5,
+    width: '95%',
+    marginVertical: 10,
+  },
+  failureBtnText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  popupSubTitle: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 5,
+  },
+  container: {
+    flex: 1,
+  },
+  innerContainer: {
+    flex: 1,
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginTop: 20,
+  },
+  text: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 20,
+  },
+  user: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  searchBtn: {
+    backgroundColor: Colors.secondary1,
+    borderRadius: 15,
+    height: 50,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  searchText: {
+    color: 'white',
+    fontSize: 21,
+    fontWeight: 'bold',
+    alignContent: 'center',
+  },
+  infoText: {
+    color: Colors.grey,
+    fontSize: 15,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  tabText: {
+    color: Colors.primary1,
+    fontSize: 13,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+  },
+  image: {
+    resizeMode: 'contain',
+    width: 40,
+    height: 40,
+  },
+  listContainer: {
+    flex: 1,
+    width: '100%',
+  },
+  listItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.white,
+    borderRadius: 15,
+    padding: 10,
+    marginVertical: 10,
+    borderColor: Colors.grey,
+    borderWidth: 1,
+    height: 100,
+  },
+  border: {
+    borderBottomColor: Colors.grey,
+    borderBottomWidth: 1.5,
+    width: '90%',
+    marginVertical: 10,
+  },
+});

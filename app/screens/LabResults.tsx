@@ -20,6 +20,7 @@ var isDarkTheme = '';
 
 export default function LabResultsScreen({ navigation, route }: any) {
   const [flag, setflag] = useState('t');
+  const [id, setid] = useState(0);
   var [fl, setfl] = useState('f');
   const [iddd, setiddd] = useState('');
   const theme = useColorScheme();
@@ -68,6 +69,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
   const [dateFrom, setDateFrom]: [Date | null, any] = useState(null);
   const [dateTo, setDateTo]: [Date | null, any] = useState(null);
   const [filteredData, setFilteredData]: [any, any] = useState([]);
+  const [filteredData2, setFilteredData2]: [any, any] = useState([]);
   const [pressed, setPressed] = useState(false);
   const [pressed2, setPressed2] = useState(false);
   const getdatafirbase = () => {
@@ -146,6 +148,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
     console.log('arry of delete', filteredArray);
     setFilteredData(filteredArray);
   };
+
   const filterData = () => {
     //
     console.log('User data: ', 'demooo');
@@ -163,7 +166,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
     }
 
     setAPIData(datagen);
-    console.log('User data:all ', APIData);
+    console.log('User data:all ', datagen);
     ///
     ///// idea  put   setFilteredData2(data) then as below
     data = APIData;
