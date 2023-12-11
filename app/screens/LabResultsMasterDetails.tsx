@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
+
 import {
   Button,
   ScrollView,
@@ -31,25 +32,55 @@ export default function LabResultsMasterDetails({ navigation, route }: any) {
   });
   const generateHTML = (value: string) =>
     `<div>
+    <head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
     <header>
-    <h1>    Report Of Lab Result </h1>  
+        <h1>  <center> Health Report </center>  </h1>  
+    <h2>  <center> Report Of Lab Result</center>  </h2>  
+    <h2><center> Date  ${datepdf}</center></h2> 
+    <h2>  <center> Fiscal Year</center>  </h2> 
 </header>
+<table>
+  <tr>
+    <th>>Name of Result</th>
+    <th>Result description</th>
+    <th>Result Status</th>
+    <th>Result Info 1</th>
+    <th>Result Info 2</th>
+  </tr>
+  <tr>
+    <td>${item.text}</td>
+    <td>${item.description}</td>
+    <td>${!item.official ? 'Approved' : 'Not Approved '}</td>
+    <td>${item.field1}</td>
+    <td>${item.field2}</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+    <td>Francisco Chang</td>
+  </tr>
+ 
+</table>
 
-<p><h2>ID: ${item.id}</h2> 
-</p>
-<p><h2>Date OF Order: ${datepdf}</h2> 
-</p>
-<p><h2>Name of Result: ${item.text}</h2> 
-</p>
-<p><h2>Result description: ${item.description}</h2> 
-</p>
-
-<p><h2>Result Status: ${!item.official ? 'Approved' : 'Not Approved '}</h2> 
-</p>
-<p><h2>Result Info 1: ${item.field1}</h2> 
-</p>
-<p><h2>Result Info 2: ${item.field2}</h2> 
-</p>
 </div>`;
   const html = generateHTML('he we make pdffffff');
   const options = {

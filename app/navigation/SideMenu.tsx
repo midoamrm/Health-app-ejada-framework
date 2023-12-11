@@ -25,6 +25,7 @@ import Cache from '../screens/demoscreen/Cacheing';
 import Cruddb from '../screens/demoscreen/Cruddb';
 import DatePicker from '../screens/demoscreen/DatePicker';
 import Doc from '../screens/Doctors';
+import Download from '../screens/Download';
 import Fileuploading from '../screens/fileuploading';
 import {
   LoginScreen,
@@ -227,7 +228,14 @@ export default function SideMenu(): JSX.Element {
             ),
           }}
         />
-
+        <Drawer.Screen
+          name={'Download'}
+          component={Download}
+          options={{
+            title: 'Download',
+            drawerItemStyle: { display: 'none' },
+          }}
+        />
         <Drawer.Screen
           name={'DatePicker'}
           component={DatePicker}

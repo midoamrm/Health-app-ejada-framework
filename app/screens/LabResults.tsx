@@ -74,7 +74,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
   const [pressed2, setPressed2] = useState(false);
   const getdatafirbase = () => {
     console.log('User data: ', 'demooo');
-    for (var i = 0; i < 16; i++) {
+    for (var i = 0; i < 25; i++) {
       firestore()
         .collection('new data2')
         .doc('id' + i)
@@ -152,7 +152,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
   const filterData = () => {
     //
     console.log('User data: ', 'demooo');
-    for (var i = 0; i < 16; i++) {
+    for (var i = 0; i < 25; i++) {
       firestore()
         .collection('new data2')
         .doc('id' + i)
@@ -298,7 +298,9 @@ export default function LabResultsScreen({ navigation, route }: any) {
               name={'download'}
               size={27}
               color={Colors.primary1}
-              onPress={() => {}}
+              onPress={() => {
+                navigation.navigate('Download', { item });
+              }}
             />
             <FontAwesome5
               name={'trash'}

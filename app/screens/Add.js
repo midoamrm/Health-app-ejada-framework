@@ -300,7 +300,7 @@ const Add = ({ navigation, route }) => {
               console.log('gvalue', gvalue);
               const ref = firestore().collection('new data2');
               const ref2 = firestore().collection('new data');
-
+              var c = 0;
               var tempp = 0;
               firestore()
                 .collection('new data')
@@ -312,21 +312,27 @@ const Add = ({ navigation, route }) => {
                   console.log('lastid', tempp);
                   if (documentSnapshot.data()) {
                   }
-                  setcc(tempp);
+                  if (c === 0) {
+                    setcc(tempp);
+                    console.log('lastiddddddddddddd', tempp);
+                    const data = {
+                      date: dt,
+                      text: tex,
+                      description: d,
+                      id: 'id' + tempp,
+
+                      official: gvalue,
+                      field1: fe,
+                      field2: 'data field' + 4 + 'for element  1 ',
+                    };
+
+                    ref.doc('id' + tempp).set(data);
+                    c = 1;
+                  }
+
                   return;
                 });
-              const data = {
-                date: dt,
-                text: tex,
-                description: d,
-                id: 'id' + tempp,
 
-                official: gvalue,
-                field1: fe,
-                field2: 'data field' + 4 + 'for element  1 ',
-              };
-
-              ref.doc('id' + cc).set(data);
               //  ref.doc('id5').set(data);
               setdate('');
               settext('');
@@ -348,8 +354,9 @@ const Add = ({ navigation, route }) => {
               onPress={() => {
                 const ref3 = firestore().collection('new data');
                 ref3.doc('lastid').set({ id: cc });
+                setcc(0);
                 toggleModal();
-                navigation.navigate('Laboratoryresults');
+                navigation.navigate('Laboratoryresults', { fl: gvalue });
               }}>
               <Text style={styles.failureBtnText}>ok </Text>
             </TouchableOpacity>
