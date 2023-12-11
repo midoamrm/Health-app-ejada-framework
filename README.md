@@ -132,4 +132,10 @@ https://github.com/midoamrm/health-app/assets/36801941/d62e674b-22c4-44b0-815c-f
 ![Screenshot_1696425598](https://github.com/midoamrm/health-app/assets/36801941/2f24f462-b564-4302-8f71-69bb22b8baa1)
 # Update data with auto refresh
 https://github.com/midoamrm/health-app/assets/36801941/6be8b950-58f5-4b8d-b0da-32625d4e90f9
+# Add data with auto refresh
+https://github.com/midoamrm/health-app/assets/36801941/5fea4397-a858-4654-85af-db962b19c9c8
+# Delete data with auto refresh
+https://github.com/midoamrm/health-app/assets/36801941/3a6a8289-6a0f-4539-91b3-af4c9fcc8714
+# Create and dowmload pdf  and view it
+https://github.com/midoamrm/health-app/assets/36801941/44585533-2e16-4389-b0b3-90c852bb208e
 
