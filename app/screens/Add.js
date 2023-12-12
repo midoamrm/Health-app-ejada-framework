@@ -2,6 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import React, { useMemo, useState } from 'react';
 import {
   Button,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -112,239 +113,241 @@ const Add = ({ navigation, route }) => {
 
   return (
     <>
-      <View style={{ padding: 10 }}>
-        <FontAwesome5
-          name={'arrow-left'}
-          size={30}
-          color={'white'}
-          onPress={() => {
-            setdate('');
-            settext('');
-            setfield1('');
-            setdescription('');
-            setDateFrom(null);
-            navigation.navigate('Laboratoryresults', { fl: 't' });
-          }}
-        />
-      </View>
-      <View
-        style={{
-          backgroundColor: 'white',
-          marginTop: 100,
-          marginLeft: 40,
-          marginRight: 40,
-          padding: 20,
-          borderTopRightRadius: 40,
-          borderTopLeftRadius: 10,
-        }}>
-        <Text
-          style={{
-            fontWeight: 'bold',
-            fontStyle: 'italic',
-            fontSize: 17,
-            color: 'blue',
-          }}>
-          Date:
-        </Text>
-
-        <DateInput
-          dateFrom={dateFrom}
-          dateTo={dateTo}
-          setDateTo={setDateTo}
-          setDateFrom={setDateFrom}
-        />
-
-        <View
-          style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <Text
-          style={{
-            fontWeight: 'bold',
-            fontStyle: 'italic',
-            color: 'blue',
-            fontSize: 17,
-          }}>
-          Text:
-        </Text>
-
-        <TextInput
-          placeholder={'Add data'}
-          placeholderTextColor="black"
-          onChangeText={(text) => Textt(text)}
-          value={text}
-          style={{ color: 'black' }}
-          textAlign="left"
-          maxLength={30}
-        />
-
-        <View
-          style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <Text
-          style={{
-            fontWeight: 'bold',
-            color: 'blue',
-            fontStyle: 'italic',
-            fontSize: 17,
-          }}>
-          Description:
-        </Text>
-
-        <TextInput
-          placeholder={'Add data'}
-          placeholderTextColor="black"
-          onChangeText={(text) => Description(text)}
-          style={{ color: 'black' }}
-          value={description}
-          textAlign="left"
-          maxLength={30}
-        />
-
-        <View
-          style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <Text
-          style={{
-            fontWeight: 'bold',
-            color: 'blue',
-            fontStyle: 'italic',
-            fontSize: 17,
-          }}>
-          Field:
-        </Text>
-
-        <TextInput
-          placeholder={'Add data'}
-          placeholderTextColor="black"
-          onChangeText={(text) => Field1(text)}
-          style={{ color: 'black' }}
-          value={field1}
-          textAlign="left"
-          maxLength={30}
-        />
-
-        <View
-          style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <Text
-          style={{
-            fontWeight: 'bold',
-            color: 'blue',
-            fontStyle: 'italic',
-            fontSize: 17,
-          }}>
-          Approved:
-        </Text>
-        <View>
-          <RadioGroup
-            radioButtons={radioButtons}
-            onPress={chooseGender}
-            selectedId={selectedId}
-            containerStyle={{
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-            }}
-          />
-        </View>
-        <View
-          style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <View
-          style={{
-            width: '100%',
-            borderRadius: 40,
-          }}>
-          <Button
-            title="Add"
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <View style={{ padding: 10 }}>
+          <FontAwesome5
+            name={'arrow-left'}
+            size={30}
+            color={'white'}
             onPress={() => {
-              ///
-              var d = '';
-              if (description === '') {
-              } else {
-                d = description;
-              }
-              //
-              var dt = '';
-              if (dateFrom === null) {
-              } else {
-                dt = st;
-              }
-              ///
-              var tex = '';
-              if (text === '') {
-              } else {
-                tex = text;
-              }
-              //
-              var fe = '';
-              if (field1 === '') {
-              } else {
-                fe = field1;
-              }
-              console.log('gvalue', gvalue);
-              const ref = firestore().collection('new data2');
-              const ref2 = firestore().collection('new data');
-              var c = 0;
-              var tempp = 0;
-              firestore()
-                .collection('new data')
-                .doc('lastid')
-                .onSnapshot((documentSnapshot) => {
-                  // console.log('lastid', documentSnapshot.data());
-                  tempp = documentSnapshot.data().id + 1;
-
-                  console.log('lastid', tempp);
-                  if (documentSnapshot.data()) {
-                  }
-                  if (c === 0) {
-                    setcc(tempp);
-                    console.log('lastiddddddddddddd', tempp);
-                    const data = {
-                      date: dt,
-                      text: tex,
-                      description: d,
-                      id: 'id' + tempp,
-
-                      official: gvalue,
-                      field1: fe,
-                      field2: 'data field' + 4 + 'for element  1 ',
-                    };
-
-                    ref.doc('id' + tempp).set(data);
-                    c = 1;
-                  }
-
-                  return;
-                });
-
-              //  ref.doc('id5').set(data);
               setdate('');
               settext('');
               setfield1('');
               setdescription('');
               setDateFrom(null);
-              toggleModal();
-              // navigation.navigate('Laboratoryresults', { fl: 't' });
+              navigation.navigate('Laboratoryresults', { fl: 't' });
             }}
           />
         </View>
-      </View>
+        <View
+          style={{
+            backgroundColor: 'white',
+            marginTop: 100,
+            marginLeft: 40,
+            marginRight: 40,
+            padding: 20,
+            borderTopRightRadius: 40,
+            borderTopLeftRadius: 10,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontStyle: 'italic',
+              fontSize: 17,
+              color: 'blue',
+            }}>
+            Date:
+          </Text>
+
+          <DateInput
+            dateFrom={dateFrom}
+            dateTo={dateTo}
+            setDateTo={setDateTo}
+            setDateFrom={setDateFrom}
+          />
+
+          <View
+            style={{
+              borderBottomColor: 'black',
+              borderBottomWidth: StyleSheet.hairlineWidth,
+            }}
+          />
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontStyle: 'italic',
+              color: 'blue',
+              fontSize: 17,
+            }}>
+            Text:
+          </Text>
+
+          <TextInput
+            placeholder={'Add data'}
+            placeholderTextColor="black"
+            onChangeText={(text) => Textt(text)}
+            value={text}
+            style={{ color: 'black' }}
+            textAlign="left"
+            maxLength={30}
+          />
+
+          <View
+            style={{
+              borderBottomColor: 'black',
+              borderBottomWidth: StyleSheet.hairlineWidth,
+            }}
+          />
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: 'blue',
+              fontStyle: 'italic',
+              fontSize: 17,
+            }}>
+            Description:
+          </Text>
+
+          <TextInput
+            placeholder={'Add data'}
+            placeholderTextColor="black"
+            onChangeText={(text) => Description(text)}
+            style={{ color: 'black' }}
+            value={description}
+            textAlign="left"
+            maxLength={30}
+          />
+
+          <View
+            style={{
+              borderBottomColor: 'black',
+              borderBottomWidth: StyleSheet.hairlineWidth,
+            }}
+          />
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: 'blue',
+              fontStyle: 'italic',
+              fontSize: 17,
+            }}>
+            Field:
+          </Text>
+
+          <TextInput
+            placeholder={'Add data'}
+            placeholderTextColor="black"
+            onChangeText={(text) => Field1(text)}
+            style={{ color: 'black' }}
+            value={field1}
+            textAlign="left"
+            maxLength={30}
+          />
+
+          <View
+            style={{
+              borderBottomColor: 'black',
+              borderBottomWidth: StyleSheet.hairlineWidth,
+            }}
+          />
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: 'blue',
+              fontStyle: 'italic',
+              fontSize: 17,
+            }}>
+            Approved:
+          </Text>
+          <View>
+            <RadioGroup
+              radioButtons={radioButtons}
+              onPress={chooseGender}
+              selectedId={selectedId}
+              containerStyle={{
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+              }}
+            />
+          </View>
+          <View
+            style={{
+              borderBottomColor: 'black',
+              borderBottomWidth: StyleSheet.hairlineWidth,
+            }}
+          />
+          <View
+            style={{
+              width: '100%',
+              borderRadius: 40,
+            }}>
+            <Button
+              title="Add"
+              onPress={() => {
+                ///
+                var d = '';
+                if (description === '') {
+                } else {
+                  d = description;
+                }
+                //
+                var dt = '';
+                if (dateFrom === null) {
+                } else {
+                  dt = st;
+                }
+                ///
+                var tex = '';
+                if (text === '') {
+                } else {
+                  tex = text;
+                }
+                //
+                var fe = '';
+                if (field1 === '') {
+                } else {
+                  fe = field1;
+                }
+                console.log('gvalue', gvalue);
+                const ref = firestore().collection('new data2');
+                const ref2 = firestore().collection('new data');
+                var c = 0;
+                var tempp = 0;
+                firestore()
+                  .collection('new data')
+                  .doc('lastid')
+                  .onSnapshot((documentSnapshot) => {
+                    // console.log('lastid', documentSnapshot.data());
+                    tempp = documentSnapshot.data().id + 1;
+
+                    console.log('lastid', tempp);
+                    if (documentSnapshot.data()) {
+                    }
+                    if (c === 0) {
+                      setcc(tempp);
+                      console.log('lastiddddddddddddd', tempp);
+                      const data = {
+                        date: dt,
+                        text: tex,
+                        description: d,
+                        id: 'id' + tempp,
+
+                        official: gvalue,
+                        field1: fe,
+                        field2: 'data field' + 4 + 'for element  1 ',
+                      };
+
+                      ref.doc('id' + tempp).set(data);
+                      c = 1;
+                    }
+
+                    return;
+                  });
+
+                //  ref.doc('id5').set(data);
+                setdate('');
+                settext('');
+                setfield1('');
+                setdescription('');
+                setDateFrom(null);
+                toggleModal();
+                // navigation.navigate('Laboratoryresults', { fl: 't' });
+              }}
+            />
+          </View>
+        </View>
+      </ScrollView>
       <Modal isVisible={isModalVisible} style={styles.mainModel}>
         <View style={styles.failureContent}>
           <Text style={styles.popupSubTitle}>Data has been added</Text>

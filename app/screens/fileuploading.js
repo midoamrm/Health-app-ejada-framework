@@ -48,7 +48,7 @@ export default class Fileuploading extends React.Component {
     const ref = firestore().collection('new data3');
     for (var i = 0; i < 1000; i++) {
       const data = {
-        date: '2023-05-' + i,
+        date: '2023-05-' + 1,
         text: 'result' + i + 1,
         description: i + 'th result',
         id: 'id' + i,

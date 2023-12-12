@@ -52,10 +52,13 @@ tr:nth-child(even) {
 </style>
 </head>
     <header>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiTlZP0qyVqVJm5y2K1h0BPZA8VVpZsAatB43iLMHZlg&s" alt="Trulli" width="100" height="100">
         <h1>  <center> Health Report </center>  </h1>  
     <h2>  <center> Report Of Lab Result</center>  </h2>  
     <h2><center> Date  ${datepdf}</center></h2> 
     <h2>  <center> Fiscal Year</center>  </h2> 
+ 
+   
 </header>
 <table>
   <tr>
@@ -80,7 +83,7 @@ tr:nth-child(even) {
   </tr>
  
 </table>
-
+<center><img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfGZV84IDvlZznvgsgYDetFJMC54YPO5qO2xlAH4X2EovxXrmLDc39Niv84w&s" alt="Trulli" width="200" height="200"></center>
 </div>`;
   const html = generateHTML('he we make pdffffff');
   const options = {

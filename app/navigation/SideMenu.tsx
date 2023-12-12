@@ -33,6 +33,7 @@ import {
   MedicalServicesScreen,
   OtpScreen,
 } from '../screens/Index';
+import LabResults1000 from '../screens/LabResult1000';
 import LabResultsScreen from '../screens/LabResults';
 import LabResultsMasterDetails from '../screens/LabResultsMasterDetails';
 import Labresultsol1 from '../screens/Labresultssol1';
@@ -412,6 +413,17 @@ export default function SideMenu(): JSX.Element {
           component={LabResultsScreen}
           options={{
             title: t('Laboratoryresults'),
+            drawerItemStyle: { display: 'ok' },
+            drawerIcon: () => (
+              <Image source={require('../assets/images/menu_icon1.png')} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name={'Laboratoryresults1000'}
+          component={LabResults1000}
+          options={{
+            title: t('Laboratoryresults1000'),
             drawerItemStyle: { display: 'ok' },
             drawerIcon: () => (
               <Image source={require('../assets/images/menu_icon1.png')} />
