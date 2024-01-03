@@ -102,7 +102,7 @@ export default function LabResults1000({ navigation, route }: any) {
   const [pressed2, setPressed2] = useState(false);
   const getdatafirbase = () => {
     console.log('User data: ', 'demooo');
-    for (var i = 0; i < 25; i++) {
+    for (var i = 0; i < 27; i++) {
       firestore()
         .collection('new data2')
         .doc('id' + i)
@@ -180,9 +180,6 @@ export default function LabResults1000({ navigation, route }: any) {
   const filterData = () => {
     setittr(ittr + 10);
     setLoading(true);
-    /* setTimeout(() => {
-      setLoading(true);
-    }, 2000);*/
 
     console.log('User data: ', 'demooo');
     for (var i = ittr; i < ittr + 10; i++) {
@@ -230,6 +227,10 @@ export default function LabResults1000({ navigation, route }: any) {
     setLoading(false);
     console.log('fltr', filteredData);
     console.log('datalength', data2.length);
+    setTimeout(() => {
+      /// filterData();
+      setLoading(true);
+    }, 2000);
   };
   console.log('User data:all ', APIData);
   console.log('pressed', pressed2);

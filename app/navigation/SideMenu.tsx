@@ -45,6 +45,7 @@ import Ocr from '../screens/Ocr';
 import Resreve from '../screens/Resrevepage';
 import Resreve2 from '../screens/Resrevewithattachment';
 import SignupScreen from '../screens/Signup';
+import TodoScreen from '../screens/todoscreen';
 import Following from '../screens/translationfoloowing';
 import Homme from '../screens/Underinplemntionpage';
 import Update from '../screens/Update';
@@ -235,6 +236,14 @@ export default function SideMenu(): JSX.Element {
           options={{
             title: 'Download',
             drawerItemStyle: { display: 'none' },
+          }}
+        />
+        <Drawer.Screen
+          name={'TodoScreen'}
+          component={TodoScreen}
+          options={{
+            title: 'TodoScreen',
+            drawerItemStyle: {},
           }}
         />
         <Drawer.Screen

@@ -152,7 +152,7 @@ export default function LabResultsScreen({ navigation, route }: any) {
   const filterData = () => {
     //
     console.log('User data: ', 'demooo');
-    for (var i = 0; i < 25; i++) {
+    for (var i = 0; i < 27; i++) {
       firestore()
         .collection('new data2')
         .doc('id' + i)
