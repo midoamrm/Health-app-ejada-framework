@@ -1,4 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import firestore from '@react-native-firebase/firestore';
+import React, { useEffect, useMemo, useState } from 'react';
+
 import {
   FlatList,
   StyleSheet,
@@ -15,6 +17,7 @@ console.log(Date.now().toString());
 
 const TodoScreen = () => {
   // Init local states
+  var datagen = [];
   const [gvalue, setGvalue] = useState(true);
   const [todo, setTodo] = useState('');
   const [todoList, setTodoList] = useState([]);
@@ -57,6 +60,27 @@ const TodoScreen = () => {
     console.log('gvalue', gvalue);
     console.log('filed2', field2);
   };
+  const getdata = () => {
+    for (var i = 0; i < 27; i++) {
+      firestore()
+        .collection('new data2')
+        .doc('id' + i)
+        .onSnapshot((documentSnapshot) => {
+          console.log('User data: ', documentSnapshot.data());
+          const tempp = documentSnapshot.data();
+          if (documentSnapshot.data()) {
+            console.log(tempp.id);
+            datagen.push(tempp);
+          }
+        });
+    }
+    setTodoList(datagen);
+    setTodo('');
+  };
+
+  useEffect(() => {
+    getdata();
+  }, []);
   // Handle Add Todo
   const handleAddTodo = () => {
     // sturtcure of a single todo item
@@ -84,7 +108,7 @@ const TodoScreen = () => {
 
   const handleEditTodo = (todo) => {
     setEditedTodo(todo);
-    setTodo(todo.title);
+    setTodo(todo.date);
   };
 
   // Handle Update
@@ -92,7 +116,7 @@ const TodoScreen = () => {
   const handleUpdateTodo = () => {
     const updatedTodos = todoList.map((item) => {
       if (item.id === editedTodo.id) {
-        return { ...item, title: todo };
+        return { ...item, date: todo };
       }
 
       return item;
@@ -123,7 +147,7 @@ const TodoScreen = () => {
           }}>
           <Text
             style={{ color: '#fff', fontSize: 20, fontWeight: '800', flex: 1 }}>
-            {item.title}
+            {item.date}
           </Text>
 
           <IconButton
