@@ -227,10 +227,6 @@ export default function LabResults1000({ navigation, route }: any) {
     setLoading(false);
     console.log('fltr', filteredData);
     console.log('datalength', data2.length);
-    setTimeout(() => {
-      /// filterData();
-      setLoading(true);
-    }, 2000);
   };
   console.log('User data:all ', APIData);
   console.log('pressed', pressed2);

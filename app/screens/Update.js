@@ -382,11 +382,11 @@ const Update = ({ navigation, route }) => {
                   official: gvalue,
                   field1: fe,
                 });
-                setdate('');
+                /*    setdate('');
                 settext('');
                 setfield1('');
                 setdescription('');
-                setDateFrom(null);
+                setDateFrom(null);*/
                 // navigation.navigate('Laboratoryresults', { fl: 't' });
                 /*axios.put(
               `https://64ec81d3f9b2b70f2bfa7413.mockapi.io/fakedata/${id}`,
