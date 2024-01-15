@@ -27,6 +27,7 @@ import DatePicker from '../screens/demoscreen/DatePicker';
 import Doc from '../screens/Doctors';
 import Download from '../screens/Download';
 import Fileuploading from '../screens/fileuploading';
+import Goals from '../screens/Goals';
 import {
   LoginScreen,
   MainScreen,
@@ -251,6 +252,21 @@ export default function SideMenu(): JSX.Element {
           component={DatePicker}
           options={{
             title: t('DatePicker'),
+            drawerIcon: () => (
+              <FontAwesome5
+                name="home"
+                size={22}
+                color={Colors.primary1}
+                style={{ paddingRight: 5 }}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name={'Goals'}
+          component={Goals}
+          options={{
+            title: t('Goals'),
             drawerIcon: () => (
               <FontAwesome5
                 name="home"
