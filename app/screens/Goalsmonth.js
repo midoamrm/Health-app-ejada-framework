@@ -12,7 +12,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Colors from '../assets/values/Colors';
 
 var isDarkTheme = '';
-const Goals = ({ navigation, route }) => {
+const Goalsm = ({ navigation, route }) => {
   const theme = useColorScheme();
 
   if (theme !== 'light') {
@@ -45,14 +45,15 @@ const Goals = ({ navigation, route }) => {
               width: '36%',
               height: '100%',
             },
-            false
+            true
               ? { backgroundColor: Colors.primary2 }
               : { backgroundColor: '#007bff' },
           ]}
           onPress={() => {
-            setPressed(true);
+            setPressed(false);
+            navigation.navigate('Goals');
           }}>
-          <Text style={[styles.tabText, false ? {} : { color: Colors.white }]}>
+          <Text style={[styles.tabText, true ? {} : { color: Colors.white }]}>
             Day
           </Text>
         </TouchableOpacity>
@@ -74,15 +75,15 @@ const Goals = ({ navigation, route }) => {
         <TouchableOpacity
           style={[
             { width: '32%', borderRadius: 7, height: '100%' },
-            true
+            false
               ? { backgroundColor: Colors.primary2 }
-              : { backgroundColor: Colors.primary1 },
+              : { backgroundColor: '#007bff' },
           ]}
           onPress={() => {
-            setPressed(false);
-            navigation.navigate('Goalsm');
+            setPressed(true);
+            //  navigation.navigate('Goals');
           }}>
-          <Text style={[styles.tabText, true ? {} : { color: Colors.white }]}>
+          <Text style={[styles.tabText, false ? {} : { color: Colors.white }]}>
             Month
           </Text>
         </TouchableOpacity>
@@ -127,7 +128,7 @@ const Goals = ({ navigation, route }) => {
     </View>
   );
 };
-export default Goals;
+export default Goalsm;
 
 const styles = StyleSheet.create({
   container: {

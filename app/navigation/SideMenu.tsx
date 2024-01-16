@@ -28,6 +28,8 @@ import Doc from '../screens/Doctors';
 import Download from '../screens/Download';
 import Fileuploading from '../screens/fileuploading';
 import Goals from '../screens/Goals';
+import Goalsm from '../screens/Goalsmonth';
+import Goalsw from '../screens/Goalsweek';
 import {
   LoginScreen,
   MainScreen,
@@ -236,6 +238,22 @@ export default function SideMenu(): JSX.Element {
           component={Download}
           options={{
             title: 'Download',
+            drawerItemStyle: { display: 'none' },
+          }}
+        />
+        <Drawer.Screen
+          name={'Goalsw'}
+          component={Goalsw}
+          options={{
+            title: 'Goalsw',
+            drawerItemStyle: { display: 'none' },
+          }}
+        />
+        <Drawer.Screen
+          name={'Goalsm'}
+          component={Goalsm}
+          options={{
+            title: 'Goalsm',
             drawerItemStyle: { display: 'none' },
           }}
         />
