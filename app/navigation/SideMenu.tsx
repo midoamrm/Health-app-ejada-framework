@@ -48,6 +48,7 @@ import Ocr from '../screens/Ocr';
 import Resreve from '../screens/Resrevepage';
 import Resreve2 from '../screens/Resrevewithattachment';
 import SignupScreen from '../screens/Signup';
+import Summ from '../screens/Summry';
 import TodoScreen from '../screens/todoscreen';
 import Following from '../screens/translationfoloowing';
 import Homme from '../screens/Underinplemntionpage';
@@ -239,6 +240,14 @@ export default function SideMenu(): JSX.Element {
           options={{
             title: 'Download',
             drawerItemStyle: { display: 'none' },
+          }}
+        />
+        <Drawer.Screen
+          name={'Summ'}
+          component={Summ}
+          options={{
+            title: 'Summry',
+            drawerItemStyle: { display: 'ok' },
           }}
         />
         <Drawer.Screen

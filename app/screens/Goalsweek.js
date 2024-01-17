@@ -8,6 +8,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { BarChart } from 'react-native-chart-kit';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Colors from '../assets/values/Colors';
 
@@ -119,9 +120,41 @@ const Goalsw = ({ navigation, route }) => {
           <Text style={{ color: '#007bff' }}> 2,300 </Text>steps to reach your
           daily goal
         </Text>
-        <Image
-          style={{ width: 300, height: 150, borderRadius: 10 }}
-          source={require('../assets/images/barq.png')}
+        <BarChart
+          data={{
+            labels: ['13 Am', '', '', '12 Pm', '', '', '13 Pm'],
+            datasets: [
+              {
+                data: [6, 900, 6, 400, 300, 900],
+              },
+            ],
+          }}
+          width={340} // from react-native
+          height={220}
+          yAxisLabel=""
+          yAxisSuffix=""
+          yAxisInterval={1} // optional, defaults to 1
+          chartConfig={{
+            backgroundColor: 'white',
+            backgroundGradientFrom: '#007bff',
+            backgroundGradientTo: '#007bff',
+            decimalPlaces: 2, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            style: {
+              borderRadius: 16,
+            },
+            propsForDots: {
+              r: '6',
+              strokeWidth: '1',
+              stroke: '#007bff',
+            },
+          }}
+          bezier
+          style={{
+            marginVertical: 4,
+            borderRadius: 16,
+          }}
         />
       </View>
     </View>
