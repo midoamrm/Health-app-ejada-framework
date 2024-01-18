@@ -16,23 +16,207 @@ const Summ = ({ navigation, route }) => {
   }
   const [pressed, setPressed] = useState(false);
   const { t, i18n } = useTranslation();
+
+  var date = new Date().toLocaleDateString('en-EG-u-nu-latn', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+  var mid = new Date().getDate(); //27
+  var fst1 = mid - 3; //24
+  var fst2 = mid - 2; // 25
+  var fst3 = mid - 1; //26
+  var fst4 = mid + 1; //28
+  var fst5 = mid + 2; // 29
+  var fst6 = mid + 3; //30
+  const handeldatebar = () => {};
+  const getdatafromdatabase = () => {};
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          backgroundColor: '#3e63a9',
+          width: 380,
+          height: 230,
+
+          borderBottomLeftRadius: 70,
+          borderBottomRightRadius: 70,
+          marginLeft: 15,
+          marginRight: 10,
+          marginBottom: 30,
+        }}>
+        <Image
+          style={{
+            width: 50,
+            height: 50,
+            padding: 10,
+            marginLeft: 20,
+            marginTop: 20,
+            borderRadius: 10,
+          }}
+          source={require('../assets/images/imgg.png')}
+        />
+        <Text
+          style={{
+            paddingTop: 40,
+            paddingLeft: 20,
+            fontSize: 15,
+            color: 'white',
+          }}>
+          {date}
+        </Text>
+        <Text
+          style={{
+            paddingTop: 1,
+            paddingLeft: 20,
+            fontSize: 35,
+            color: 'white',
+          }}>
+          Hello, Mohamed
+        </Text>
+      </View>
+      <View>
+        <View style={{ flexDirection: 'row', marginLeft: 18 }}>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 20,
+            }}>
+            Wed
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 20,
+            }}>
+            Thur
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 20,
+            }}>
+            Fri
+          </Text>
+          <View
+            style={{
+              backgroundColor: '#2a4271',
+              marginRight: 20,
+              borderRadius: 5,
+            }}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: 'white',
+              }}>
+              Sat
+            </Text>
+          </View>
+
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 20,
+            }}>
+            Sun
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 20,
+            }}>
+            Mon
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 20,
+            }}>
+            Tue
+          </Text>
+        </View>
+        <View style={{ flexDirection: 'row', marginLeft: 18 }}>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 45,
+            }}>
+            {fst1}
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 34,
+            }}>
+            {fst2}
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 20,
+            }}>
+            {fst3}
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 34,
+            }}>
+            {mid}
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 34,
+            }}>
+            {fst4}
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 34,
+            }}>
+            {fst5}
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: 'white',
+              paddingRight: 20,
+            }}>
+            {fst6}
+          </Text>
+        </View>
+      </View>
       <View style={{ marginLeft: 40 }}>
         <Text
           style={{
-            fontSize: 40,
+            fontSize: 30,
             color: 'white',
+            paddingBottom: 10,
           }}>
           Summary
         </Text>
         <View style={{ flexDirection: 'row' }}>
           <View
             style={{
-              backgroundColor: '#007bff',
+              backgroundColor: '#3462ba',
               width: 150,
               height: 150,
-              borderRadius: 10,
+              borderRadius: 25,
               marginRight: 40,
             }}>
             <Text
@@ -51,7 +235,7 @@ const Summ = ({ navigation, route }) => {
                 marginLeft: 20,
                 borderRadius: 10,
               }}
-              source={require('../assets/images/iconq.png')}
+              source={require('../assets/images/iq1.png')}
             />
             <Text
               style={{
@@ -68,7 +252,7 @@ const Summ = ({ navigation, route }) => {
               backgroundColor: '#ff6d6f',
               width: 150,
               height: 150,
-              borderRadius: 10,
+              borderRadius: 25,
             }}>
             <Text
               style={{
@@ -86,7 +270,7 @@ const Summ = ({ navigation, route }) => {
                 marginLeft: 20,
                 borderRadius: 10,
               }}
-              source={require('../assets/images/iconq.png')}
+              source={require('../assets/images/iq2.png')}
             />
             <Text
               style={{
@@ -99,13 +283,13 @@ const Summ = ({ navigation, route }) => {
             </Text>
           </View>
         </View>
-        <View style={{ flexDirection: 'row', paddingTop: 30 }}>
+        <View style={{ flexDirection: 'row', paddingTop: 15 }}>
           <View
             style={{
               backgroundColor: '#5d63ed',
               width: 150,
               height: 150,
-              borderRadius: 10,
+              borderRadius: 25,
               marginRight: 40,
             }}>
             <Text
@@ -124,7 +308,7 @@ const Summ = ({ navigation, route }) => {
                 marginLeft: 20,
                 borderRadius: 10,
               }}
-              source={require('../assets/images/iconq.png')}
+              source={require('../assets/images/iq3.png')}
             />
             <Text
               style={{
@@ -141,7 +325,7 @@ const Summ = ({ navigation, route }) => {
               backgroundColor: '#fea363',
               width: 150,
               height: 150,
-              borderRadius: 10,
+              borderRadius: 25,
             }}>
             <Text
               style={{
@@ -159,7 +343,7 @@ const Summ = ({ navigation, route }) => {
                 marginLeft: 20,
                 borderRadius: 10,
               }}
-              source={require('../assets/images/iconq.png')}
+              source={require('../assets/images/iq4.png')}
             />
             <Text
               style={{
