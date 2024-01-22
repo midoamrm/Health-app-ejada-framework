@@ -1,3 +1,4 @@
+import firestore from '@react-native-firebase/firestore';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -14,7 +15,51 @@ import Colors from '../assets/values/Colors';
 var isDarkTheme = '';
 const Goals = ({ navigation, route }) => {
   const theme = useColorScheme();
+  const [lb11, setl1] = useState(0);
+  const [lb22, setl2] = useState(0);
+  const [lb33, setl3] = useState(0);
+  const [v11, setv11] = useState(0);
+  const [v22, setv22] = useState(0);
+  const [v33, setv33] = useState(0);
+  const [steps1, setstep1] = useState(' ');
+  const [steps2, setstep2] = useState(' ');
+  var setp11 = 0;
+  var l1 = 0;
+  var l2 = 0;
+  var l3 = 0;
+  var v1 = 0;
+  var v2 = 0;
+  var v3 = 0;
 
+  var step22 = 0;
+  const getdatafromdatabase = () => {
+    firestore()
+      .collection('Goals')
+      .doc('Goalss')
+      .onSnapshot((documentSnapshot) => {
+        if (!documentSnapshot.data()) {
+          console.log('data found');
+        }
+        console.log('User data of sum: ', documentSnapshot.data());
+        l1 = documentSnapshot.data().l1;
+        l2 = documentSnapshot.data().l2;
+        l3 = documentSnapshot.data().l3;
+        v1 = documentSnapshot.data().v1;
+        v2 = documentSnapshot.data().v2;
+        v3 = documentSnapshot.data().v3;
+        setp11 = documentSnapshot.data().steps1;
+        step22 = documentSnapshot.data().steps2;
+        setl1(l1);
+        setl2(l2);
+        setl3(l3);
+        setv11(v1);
+        setv22(v2);
+        setv33(v3);
+        setstep1(setp11);
+        setstep2(step22);
+      });
+  };
+  getdatafromdatabase();
   if (theme !== 'light') {
     isDarkTheme = '#FFFFFF';
     console.log('gf', isDarkTheme);
@@ -102,7 +147,7 @@ const Goals = ({ navigation, route }) => {
                   style={{ width: 50, height: 50 }}
                   source={require('../assets/images/iconq.png')}
                 />
-                <Text style={{ color: 'white', fontSize: 40 }}>5,700</Text>
+                <Text style={{ color: 'white', fontSize: 40 }}>{steps1}</Text>
                 <Text style={{ color: 'white', fontSize: 25 }}>steps</Text>
               </>
             )}
@@ -116,15 +161,15 @@ const Goals = ({ navigation, route }) => {
             fontWeight: 'bold',
             padding: 25,
           }}>
-          <Text style={{ color: '#007bff' }}> 2,300 </Text>steps to reach your
+          <Text style={{ color: '#007bff' }}> {steps2}</Text>steps to reach your
           daily goal
         </Text>
         <BarChart
           data={{
-            labels: ['13 Am', '', '', '12 Pm', '', '', '13 Pm'],
+            labels: [lb11, '', '', lb22, '', '', lb33],
             datasets: [
               {
-                data: [6, 900, 6, 400, 300, 900],
+                data: [v11, 900, 6, v22, 300, v33],
               },
             ],
           }}
