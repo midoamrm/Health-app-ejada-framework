@@ -47,6 +47,7 @@ import Myorder from '../screens/Myorder';
 import Ocr from '../screens/Ocr';
 import Resreve from '../screens/Resrevepage';
 import Resreve2 from '../screens/Resrevewithattachment';
+import Servicesreqhistory from '../screens/Servicesreqhistory';
 import SignupScreen from '../screens/Signup';
 import Summ from '../screens/Summry';
 import TodoScreen from '../screens/todoscreen';
@@ -234,6 +235,22 @@ export default function SideMenu(): JSX.Element {
             ),
           }}
         />
+        <Drawer.Screen
+          name={'Servicesreqhistory'}
+          component={Servicesreqhistory}
+          options={{
+            title: 'Services Request History',
+            drawerIcon: () => (
+              <FontAwesome5
+                name="home"
+                size={22}
+                color={Colors.primary1}
+                style={{ paddingRight: 5 }}
+              />
+            ),
+          }}
+        />
+
         <Drawer.Screen
           name={'Download'}
           component={Download}
