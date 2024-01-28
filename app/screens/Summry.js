@@ -2,6 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Colors from '../assets/values/Colors';
 var isDarkTheme = '';
 const Summ = ({ navigation, route }) => {
@@ -343,150 +344,158 @@ const Summ = ({ navigation, route }) => {
           Summary
         </Text>
         <View style={{ flexDirection: 'row' }}>
-          <View
-            style={{
-              backgroundColor: '#3462ba',
-              width: 150,
-              height: 150,
-              borderRadius: 25,
-              marginRight: 40,
-            }}>
-            <Text
+          <TouchableOpacity>
+            <View
               style={{
-                padding: 10,
-                fontSize: 20,
-                color: 'white',
+                backgroundColor: '#3462ba',
+                width: 150,
+                height: 150,
+                borderRadius: 25,
+                marginRight: 40,
               }}>
-              Steps
-            </Text>
-            <Image
+              <Text
+                style={{
+                  padding: 10,
+                  fontSize: 20,
+                  color: 'white',
+                }}>
+                Steps
+              </Text>
+              <Image
+                style={{
+                  width: 50,
+                  height: 50,
+                  padding: 10,
+                  marginLeft: 20,
+                  borderRadius: 10,
+                }}
+                source={require('../assets/images/iq1.png')}
+              />
+              <Text
+                style={{
+                  paddingTop: 20,
+                  paddingLeft: 80,
+                  fontSize: 20,
+                  color: 'white',
+                }}>
+                {setpss}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View
               style={{
-                width: 50,
-                height: 50,
-                padding: 10,
-                marginLeft: 20,
-                borderRadius: 10,
-              }}
-              source={require('../assets/images/iq1.png')}
-            />
-            <Text
-              style={{
-                paddingTop: 20,
-                paddingLeft: 80,
-                fontSize: 20,
-                color: 'white',
+                backgroundColor: '#ff6d6f',
+                width: 150,
+                height: 150,
+                borderRadius: 25,
               }}>
-              {setpss}
-            </Text>
-          </View>
-          <View
-            style={{
-              backgroundColor: '#ff6d6f',
-              width: 150,
-              height: 150,
-              borderRadius: 25,
-            }}>
-            <Text
-              style={{
-                padding: 10,
-                fontSize: 20,
-                color: 'white',
-              }}>
-              Heart Rate
-            </Text>
-            <Image
-              style={{
-                width: 50,
-                height: 50,
-                padding: 10,
-                marginLeft: 20,
-                borderRadius: 10,
-              }}
-              source={require('../assets/images/iq2.png')}
-            />
-            <Text
-              style={{
-                paddingTop: 20,
-                paddingLeft: 80,
-                fontSize: 20,
-                color: 'white',
-              }}>
-              {hr11} bpm
-            </Text>
-          </View>
+              <Text
+                style={{
+                  padding: 10,
+                  fontSize: 20,
+                  color: 'white',
+                }}>
+                Heart Rate
+              </Text>
+              <Image
+                style={{
+                  width: 50,
+                  height: 50,
+                  padding: 10,
+                  marginLeft: 20,
+                  borderRadius: 10,
+                }}
+                source={require('../assets/images/iq2.png')}
+              />
+              <Text
+                style={{
+                  paddingTop: 20,
+                  paddingLeft: 80,
+                  fontSize: 20,
+                  color: 'white',
+                }}>
+                {hr11} bpm
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
         <View style={{ flexDirection: 'row', paddingTop: 15 }}>
-          <View
-            style={{
-              backgroundColor: '#5d63ed',
-              width: 150,
-              height: 150,
-              borderRadius: 25,
-              marginRight: 40,
-            }}>
-            <Text
+          <TouchableOpacity>
+            <View
               style={{
-                padding: 10,
-                fontSize: 20,
-                color: 'white',
+                backgroundColor: '#5d63ed',
+                width: 150,
+                height: 150,
+                borderRadius: 25,
+                marginRight: 40,
               }}>
-              Sleep
-            </Text>
-            <Image
+              <Text
+                style={{
+                  padding: 10,
+                  fontSize: 20,
+                  color: 'white',
+                }}>
+                Sleep
+              </Text>
+              <Image
+                style={{
+                  width: 50,
+                  height: 50,
+                  padding: 10,
+                  marginLeft: 20,
+                  borderRadius: 10,
+                }}
+                source={require('../assets/images/iq3.png')}
+              />
+              <Text
+                style={{
+                  paddingTop: 20,
+                  paddingLeft: 80,
+                  fontSize: 20,
+                  color: 'white',
+                }}>
+                {sleepp}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View
               style={{
-                width: 50,
-                height: 50,
-                padding: 10,
-                marginLeft: 20,
-                borderRadius: 10,
-              }}
-              source={require('../assets/images/iq3.png')}
-            />
-            <Text
-              style={{
-                paddingTop: 20,
-                paddingLeft: 80,
-                fontSize: 20,
-                color: 'white',
+                backgroundColor: '#fea363',
+                width: 150,
+                height: 150,
+                borderRadius: 25,
               }}>
-              {sleepp}
-            </Text>
-          </View>
-          <View
-            style={{
-              backgroundColor: '#fea363',
-              width: 150,
-              height: 150,
-              borderRadius: 25,
-            }}>
-            <Text
-              style={{
-                padding: 10,
-                fontSize: 20,
-                color: 'white',
-              }}>
-              Heart Rate
-            </Text>
-            <Image
-              style={{
-                width: 50,
-                height: 50,
-                padding: 10,
-                marginLeft: 20,
-                borderRadius: 10,
-              }}
-              source={require('../assets/images/iq4.png')}
-            />
-            <Text
-              style={{
-                paddingTop: 20,
-                paddingLeft: 80,
-                fontSize: 20,
-                color: 'white',
-              }}>
-              {hr11} bpm
-            </Text>
-          </View>
+              <Text
+                style={{
+                  padding: 10,
+                  fontSize: 20,
+                  color: 'white',
+                }}>
+                Heart Rate
+              </Text>
+              <Image
+                style={{
+                  width: 50,
+                  height: 50,
+                  padding: 10,
+                  marginLeft: 20,
+                  borderRadius: 10,
+                }}
+                source={require('../assets/images/iq4.png')}
+              />
+              <Text
+                style={{
+                  paddingTop: 20,
+                  paddingLeft: 80,
+                  fontSize: 20,
+                  color: 'white',
+                }}>
+                {hr11} bpm
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
         <View />
       </View>

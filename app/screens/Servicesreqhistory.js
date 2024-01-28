@@ -11,10 +11,10 @@ const Servicesreqhistory = ({ navigation }) => {
         data={[
           {
             id: 1,
-            procedurekind: 'procedurekind',
-            date: 'date',
-            price: 'price',
-            description: 'description',
+            procedurekind: 'Procedurekind',
+            date: 'Date',
+            price: 'Price',
+            description: 'Description',
             Attach: {
               card: [],
               addtionalAttach: [],
@@ -22,10 +22,10 @@ const Servicesreqhistory = ({ navigation }) => {
           },
           {
             id: 2,
-            procedurekind: 'procedurekind2',
-            date: 'date2',
-            price: 'price2',
-            description: 'description2',
+            procedurekind: 'Procedurekind2',
+            date: 'Date2',
+            price: 'Price2',
+            description: 'Description2',
             Attach: {
               card: [],
               addtionalAttach: [],
@@ -33,10 +33,10 @@ const Servicesreqhistory = ({ navigation }) => {
           },
           {
             id: 3,
-            procedurekind: 'procedurekind3',
-            date: 'date3',
-            price: 'price3',
-            description: 'description3',
+            procedurekind: 'Procedurekind3',
+            date: 'Date3',
+            price: 'Price3',
+            description: 'Description3',
             Attach: {
               card: [],
               addtionalAttach: [],
@@ -45,12 +45,22 @@ const Servicesreqhistory = ({ navigation }) => {
         ]}
         scrollEnabled={true}
         renderItem={({ item, index }) => (
-          <View style={{ backgroundColor: 'white', paddingTop: '40' }}>
+          <View
+            style={{
+              backgroundColor: 'white',
+              marginTop: 15,
+              marginBottom: 15,
+              borderRadius: 40,
+              marginLeft: 10,
+              marginRight: 10,
+            }}>
             <View
               style={{
                 borderBottomColor: 'black',
                 borderBottomWidth: 1.5,
-                width: '90%',
+                width: '100%',
+                marginLeft: 20,
+                width: 350,
                 marginVertical: 10,
               }}
             />
@@ -58,34 +68,35 @@ const Servicesreqhistory = ({ navigation }) => {
               style={{
                 fontSize: 25,
                 color: 'black',
-                marginLeft: 70,
-                marginTop: 20,
+                marginLeft: 100,
+                marginTop: 5,
               }}>
               Request Number{item.id}
             </Text>
-            <Text style={{ color: 'black', fontSize: 30, marginLeft: 30 }}>
+            <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
               {item.procedurekind}
             </Text>
-            <Text style={{ color: 'black', fontSize: 30, marginLeft: 30 }}>
+            <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
               {item.date}
             </Text>
-            <Text style={{ color: 'black', fontSize: 15, marginLeft: 30 }}>
+            <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
               {item.price}
             </Text>
-            <Text style={{ color: 'black', fontSize: 15, marginLeft: 30 }}>
+            <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
               {item.description}
             </Text>
-            <Text style={{ color: 'black', fontSize: 15, marginLeft: 30 }}>
+            <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
               card
             </Text>
-            <Text style={{ color: 'black', fontSize: 15, marginLeft: 30 }}>
+            <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
               addtional attachments
             </Text>
             <View
               style={{
                 borderBottomColor: 'black',
                 borderBottomWidth: 1.5,
-                width: '90%',
+                marginLeft: 20,
+                width: 350,
                 marginVertical: 10,
               }}
             />

@@ -132,8 +132,8 @@ const Goals = ({ navigation, route }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={{ marginLeft: 70, marginTop: 30 }}>
-        <View style={{ paddingLeft: 20 }}>
+      <View style={{ marginLeft: 40, marginTop: 30 }}>
+        <View style={{ paddingLeft: 60 }}>
           <AnimatedCircularProgress
             size={200}
             width={15}
@@ -144,8 +144,8 @@ const Goals = ({ navigation, route }) => {
             {(fill) => (
               <>
                 <Image
-                  style={{ width: 50, height: 50 }}
-                  source={require('../assets/images/iconq.png')}
+                  style={{ width: 50, height: 50, borderRadius: 20 }}
+                  source={require('../assets/images/steps.png')}
                 />
                 <Text style={{ color: 'white', fontSize: 40 }}>{steps1}</Text>
                 <Text style={{ color: 'white', fontSize: 25 }}>steps</Text>
@@ -179,9 +179,6 @@ const Goals = ({ navigation, route }) => {
           yAxisSuffix=""
           yAxisInterval={1} // optional, defaults to 1
           chartConfig={{
-            backgroundColor: 'white',
-            backgroundGradientFrom: '#007bff',
-            backgroundGradientTo: '#007bff',
             decimalPlaces: 2, // optional, defaults to 2dp
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -190,8 +187,8 @@ const Goals = ({ navigation, route }) => {
             },
             propsForDots: {
               r: '6',
-              strokeWidth: '1',
-              stroke: '#007bff',
+              strokeWidth: '4',
+              stroke: 'white',
             },
           }}
           bezier

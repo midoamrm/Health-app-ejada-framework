@@ -265,6 +265,14 @@ export default function SideMenu(): JSX.Element {
           options={{
             title: 'Summry',
             drawerItemStyle: { display: 'ok' },
+            drawerIcon: () => (
+              <FontAwesome5
+                name="home"
+                size={22}
+                color={Colors.primary1}
+                style={{ paddingRight: 5 }}
+              />
+            ),
           }}
         />
         <Drawer.Screen
@@ -288,6 +296,14 @@ export default function SideMenu(): JSX.Element {
           component={TodoScreen}
           options={{
             title: 'TodoScreen',
+            drawerIcon: () => (
+              <FontAwesome5
+                name="home"
+                size={22}
+                color={Colors.primary1}
+                style={{ paddingRight: 5 }}
+              />
+            ),
             drawerItemStyle: {},
           }}
         />
@@ -412,7 +428,7 @@ export default function SideMenu(): JSX.Element {
           name={'Otp'}
           component={OtpScreen}
           options={{
-            drawerItemStyle: { display: 'ok' },
+            drawerItemStyle: { display: 'none' },
             drawerIcon: () => (
               <FontAwesome5
                 name="home"
