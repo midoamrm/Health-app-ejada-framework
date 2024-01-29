@@ -16,8 +16,12 @@ const Servicesreqhistory = ({ navigation }) => {
             price: 'Price',
             description: 'Description',
             Attach: {
-              card: [],
-              addtionalAttach: [],
+              card: [{ name: 'file3' }, { name: 'file2' }, { name: 'file1' }],
+              addtionalAttach: [
+                { name: 'file3' },
+                { name: 'file2' },
+                { name: 'file1' },
+              ],
             },
           },
           {
@@ -27,8 +31,12 @@ const Servicesreqhistory = ({ navigation }) => {
             price: 'Price2',
             description: 'Description2',
             Attach: {
-              card: [],
-              addtionalAttach: [],
+              card: [{ name: 'file3' }, { name: 'file2' }, { name: 'file1' }],
+              addtionalAttach: [
+                { name: 'file3' },
+                { name: 'file2' },
+                { name: 'file1' },
+              ],
             },
           },
           {
@@ -38,8 +46,12 @@ const Servicesreqhistory = ({ navigation }) => {
             price: 'Price3',
             description: 'Description3',
             Attach: {
-              card: [],
-              addtionalAttach: [],
+              card: [{ name: 'file3' }, { name: 'file2' }, { name: 'file1' }],
+              addtionalAttach: [
+                { name: 'file3' },
+                { name: 'file2' },
+                { name: 'file1' },
+              ],
             },
           },
         ]}
@@ -85,12 +97,51 @@ const Servicesreqhistory = ({ navigation }) => {
             <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
               {item.description}
             </Text>
-            <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
-              card
-            </Text>
-            <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
-              addtional attachments
-            </Text>
+            <View
+              style={{
+                borderWidth: 3,
+                width: 350,
+                marginLeft: 20,
+                marginBottom: 10,
+                borderRadius: 20,
+              }}>
+              <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
+                card
+              </Text>
+              <FlatList
+                data={item.Attach.card}
+                renderItem={({ item, index }) => (
+                  <View>
+                    <Text
+                      style={{ color: 'black', fontSize: 15, marginLeft: 30 }}>
+                      #{item.name}
+                    </Text>
+                  </View>
+                )}
+              />
+            </View>
+            <View
+              style={{
+                borderWidth: 3,
+                width: 350,
+                marginLeft: 20,
+                marginBottom: 10,
+                borderRadius: 20,
+              }}>
+              <Text style={{ color: 'black', fontSize: 20, marginLeft: 30 }}>
+                addtional attachments
+              </Text>
+              <FlatList
+                data={item.Attach.addtionalAttach}
+                renderItem={({ item, index }) => (
+                  <Text
+                    style={{ color: 'black', fontSize: 15, marginLeft: 30 }}>
+                    #{item.name}
+                  </Text>
+                )}
+              />
+            </View>
+
             <View
               style={{
                 borderBottomColor: 'black',

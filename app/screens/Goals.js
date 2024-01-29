@@ -159,7 +159,7 @@ const Goals = ({ navigation, route }) => {
             color: '#8DA9B6',
             fontSize: 25,
             fontWeight: 'bold',
-            padding: 25,
+            padding: 9,
           }}>
           <Text style={{ color: '#007bff' }}> {steps2}</Text>steps to reach your
           daily goal
