@@ -242,7 +242,7 @@ export default function SideMenu(): JSX.Element {
             title: 'Services Request History',
             drawerIcon: () => (
               <FontAwesome5
-                name="home"
+                name="servicestack"
                 size={22}
                 color={Colors.primary1}
                 style={{ paddingRight: 5 }}
@@ -263,11 +263,11 @@ export default function SideMenu(): JSX.Element {
           name={'Summ'}
           component={Summ}
           options={{
-            title: 'Summry',
+            title: 'Healthsummry',
             drawerItemStyle: { display: 'ok' },
             drawerIcon: () => (
               <FontAwesome5
-                name="home"
+                name="heartbeat"
                 size={22}
                 color={Colors.primary1}
                 style={{ paddingRight: 5 }}
@@ -295,10 +295,10 @@ export default function SideMenu(): JSX.Element {
           name={'TodoScreen'}
           component={TodoScreen}
           options={{
-            title: 'TodoScreen',
+            title: 'General  lab',
             drawerIcon: () => (
               <FontAwesome5
-                name="home"
+                name="vials"
                 size={22}
                 color={Colors.primary1}
                 style={{ paddingRight: 5 }}
@@ -311,10 +311,10 @@ export default function SideMenu(): JSX.Element {
           name={'DatePicker'}
           component={DatePicker}
           options={{
-            title: t('DatePicker'),
+            title: t(' General DatePicker'),
             drawerIcon: () => (
               <FontAwesome5
-                name="home"
+                name="calendar"
                 size={22}
                 color={Colors.primary1}
                 style={{ paddingRight: 5 }}
@@ -326,10 +326,10 @@ export default function SideMenu(): JSX.Element {
           name={'Goals'}
           component={Goals}
           options={{
-            title: t('Goals'),
+            title: t('General Goals'),
             drawerIcon: () => (
               <FontAwesome5
-                name="home"
+                name="bullseye"
                 size={22}
                 color={Colors.primary1}
                 style={{ paddingRight: 5 }}
@@ -357,10 +357,10 @@ export default function SideMenu(): JSX.Element {
           name={'Following'}
           component={Following}
           options={{
-            title: t('Following'),
+            title: t('General Track order'),
             drawerIcon: () => (
               <FontAwesome5
-                name="home"
+                name="truck"
                 size={22}
                 color={Colors.primary1}
                 style={{ paddingRight: 5 }}
@@ -372,10 +372,10 @@ export default function SideMenu(): JSX.Element {
           name={'fileuploading'}
           component={Fileuploading}
           options={{
-            title: t('fileuploading'),
+            title: t('General Fileuploading'),
             drawerIcon: () => (
               <FontAwesome5
-                name="home"
+                name="file-upload"
                 size={22}
                 color={Colors.primary1}
                 style={{ paddingRight: 5 }}
@@ -493,14 +493,20 @@ export default function SideMenu(): JSX.Element {
             drawerItemStyle: { display: 'none' },
           }}
         />
+
         <Drawer.Screen
           name={'Laboratoryresults'}
           component={LabResultsScreen}
           options={{
-            title: t('Laboratoryresults'),
+            title: t('General  results'),
             drawerItemStyle: { display: 'ok' },
             drawerIcon: () => (
-              <Image source={require('../assets/images/menu_icon1.png')} />
+              <FontAwesome5
+                name="poll"
+                size={22}
+                color={Colors.primary1}
+                style={{ paddingRight: 5 }}
+              />
             ),
           }}
         />
@@ -508,10 +514,15 @@ export default function SideMenu(): JSX.Element {
           name={'Laboratoryresults1000'}
           component={LabResults1000}
           options={{
-            title: t('Laboratoryresults1000'),
+            title: t('General  results1000'),
             drawerItemStyle: { display: 'ok' },
             drawerIcon: () => (
-              <Image source={require('../assets/images/menu_icon1.png')} />
+              <FontAwesome5
+                name="poll"
+                size={22}
+                color={Colors.primary1}
+                style={{ paddingRight: 5 }}
+              />
             ),
           }}
         />
@@ -529,19 +540,31 @@ export default function SideMenu(): JSX.Element {
           name={t('Recordappointments')}
           component={Daterecord}
           options={{
+            title: t('General  Record'),
             drawerItemStyle: { display: 'ok' },
             drawerIcon: () => (
-              <Image source={require('../assets/images/menu_icon1.png')} />
+              <FontAwesome5
+                name="calendar-check"
+                size={22}
+                color={Colors.primary1}
+                style={{ paddingRight: 5 }}
+              />
             ),
           }}
         />
+
         <Drawer.Screen
           name={t('list')}
           component={Llist}
           options={{
             drawerItemStyle: { display: 'ok' },
             drawerIcon: () => (
-              <Image source={require('../assets/images/menu_icon1.png')} />
+              <FontAwesome5
+                name="list"
+                size={22}
+                color={Colors.primary1}
+                style={{ paddingRight: 5 }}
+              />
             ),
           }}
         />
@@ -563,10 +586,11 @@ export default function SideMenu(): JSX.Element {
           name={t('onemilonsol')}
           component={Labresultsol1}
           options={{
+            title: t('General  one_milon_sol'),
             drawerItemStyle: { display: 'ok' },
             drawerIcon: () => (
               <FontAwesome5
-                name="home"
+                name="smog"
                 size={22}
                 color={Colors.primary1}
                 style={{ paddingRight: 5 }}
